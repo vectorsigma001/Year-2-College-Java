@@ -52,12 +52,19 @@ class Main{
     //|$$$$$$$$$$$$$$$$$$$$$$$||Action listener||$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$/
     //setting actionlistener for theme 
     JButton changeUiColor=new JButton("Change Theme");
+    changeUiColor.setLocation(450,700);
     frame.add(changeUiColor);
-     changeUiColor.addActionListener(new ActionListener){
+    changeUiColor.addActionListener(new ActionListener(){
     public void actionPerformed(ActionEvent e){
-        frame.setContentPane().setBackground(Color.WHITE);;
+        Color themeColorcheck=frame.getContentPane().getBackground();
+        if(themeColorcheck==Color.BLACK){
+          frame.getContentPane().setBackground(Color.WHITE);
+        }
+        else if(themeColorcheck==Color.BLACK){
+            frame.getContentPane().setBackground(Color.BLACK);
+        }
     }
-  }
+  });
 
     
     frame.setLayout(null);
@@ -70,4 +77,5 @@ class Main{
     Main object=new Main();
   }
 }
+
 
