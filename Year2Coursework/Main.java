@@ -12,11 +12,15 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.TextField;
 
 
 class Main{
   JFrame frame;
   JPanel studentPanel,regularPanel,dropoutPanel;
+  //forstudent
+  JLabel studentName,dateOfBirth,courseName,enrollmentID,dateOfEnrollment,courseDuration,tuitionFee;
   public Main(){
     frame=new JFrame("college Coursework");
     Toolkit kit=Toolkit.getDefaultToolkit();
@@ -26,13 +30,38 @@ class Main{
     frame.setSize(screenWidth,screenHeight );
 
 
-
+    
     //working with studentPanel
     studentPanel=new JPanel();
     studentPanel.setSize(350,600);
     studentPanel.setBackground(new Color(155,66,245));
     studentPanel.setLocation(20,25);
+    //studentPanel components
+    studentName=new JLabel("StudentName");
+    TextField studentNameTf=new TextField("Student Name");
+    studentNameTf.setBounds(20,150,30,20);
+    studentPanel.add(studentName);
+    studentPanel.add(studentNameTf);
+
+    
+
+
     frame.add(studentPanel);
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     //working with regularPanel
     regularPanel=new JPanel();
@@ -50,21 +79,7 @@ class Main{
 
    
     //|$$$$$$$$$$$$$$$$$$$$$$$||Action listener||$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$/
-    //setting actionlistener for theme 
-    JButton changeUiColor=new JButton("Change Theme");
-    changeUiColor.setLocation(450,700);
-    frame.add(changeUiColor);
-    changeUiColor.addActionListener(new ActionListener(){
-    public void actionPerformed(ActionEvent e){
-        Color themeColorcheck=frame.getContentPane().getBackground();
-        if(themeColorcheck==Color.BLACK){
-          frame.getContentPane().setBackground(Color.WHITE);
-        }
-        else if(themeColorcheck==Color.BLACK){
-            frame.getContentPane().setBackground(Color.BLACK);
-        }
-    }
-  });
+    
 
     
     frame.setLayout(null);
@@ -77,5 +92,6 @@ class Main{
     Main object=new Main();
   }
 }
+
 
 
