@@ -39,11 +39,13 @@ class Main{
     studentPanel.setLayout(null);
     studentPanel.setLocation(20,25);
     //studentPanel components
-    studentName=new JLabel("StudentName");
-    studentName.setBounds(10,80,80,20);
-    studentName.setFont(Font.BOLD);
+    studentName=new JLabel("StudentName:");
+    studentName.setBounds(10,80,100,20);
+    studentName.setFont(new Font("Arial",Font.BOLD,14));
+    studentName.setForeground(Color.WHITE);
     TextField studentNameTf=new TextField("Student Name");
-    studentNameTf.setBounds(150,80,150,20);
+    studentNameTf.setBounds(150,80,120,20);
+    studentNameTf.setFont(new Font("Arial",Font.PLAIN,14));
     studentPanel.add(studentName);
     studentPanel.add(studentNameTf);
 
@@ -96,6 +98,8 @@ class Main{
     Main object=new Main();
   }
 }
+
+
 
 
 
