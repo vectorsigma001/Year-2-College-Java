@@ -17,11 +17,14 @@ import javax.swing.JLabel;
 import java.awt.TextField;
 
 
+import java.util.ArrayList;
+
+
 class Main{
   JFrame frame;
   JPanel studentPanel,regularPanel,dropoutPanel;
   //forstudent
-  JLabel studentName,dateOfBirth,courseName,enrollmentID,dateOfEnrollment,courseDuration,tuitionFee;
+  JLabel studentNamelb,dateOfBirthlb,courseName,enrollmentID,dateOfEnrollment,courseDuration,tuitionFee;
   public Main(){
     frame=new JFrame("college Coursework");
     Toolkit kit=Toolkit.getDefaultToolkit();
@@ -31,7 +34,9 @@ class Main{
     frame.setSize(screenWidth,screenHeight );
 
 
+  
     
+
     //working with studentPanel
     studentPanel=new JPanel();
     studentPanel.setSize(350,600);
@@ -39,19 +44,28 @@ class Main{
     studentPanel.setLayout(null);
     studentPanel.setLocation(20,25);
     //studentPanel components
-    studentName=new JLabel("StudentName:");
-    studentName.setBounds(10,80,100,20);
-    studentName.setFont(new Font("Arial",Font.BOLD,14));
-    studentName.setForeground(Color.WHITE);
+
+    //StudentName
+    studentNamelb=new JLabel("StudentName:");
+    studentNamelb.setBounds(10,80,100,20);
+    studentNamelb.setFont(new Font("Arial",Font.BOLD,14));
+    studentNamelb.setForeground(Color.WHITE);
     TextField studentNameTf=new TextField("Student Name");
     studentNameTf.setBounds(150,80,120,20);
     studentNameTf.setFont(new Font("Arial",Font.PLAIN,14));
-    studentPanel.add(studentName);
+    studentPanel.add(studentNamelb);
     studentPanel.add(studentNameTf);
 
+    //Date Of Birth
+    dateOfBirthlb=new JLabel("Date Of Birth:");
+    dateOfBirthlb.setBounds(10,120,100,20);
+    dateOfBirthlb.setFont(new Font("Arial",Font.BOLD,14));
+    dateOfBirthlb.setForeground(Color.WHITE);
+    studentPanel.add(dateOfBirthlb);
     
-
-
+    ArrayList year=new ArrayList<>();
+    ArrayList month=new ArrayList<>();
+    ArrayList day=new ArrayList<>();
     frame.add(studentPanel);
     
 
