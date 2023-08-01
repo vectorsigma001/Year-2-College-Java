@@ -15,7 +15,7 @@ class Main{
     Dimension screenDimension=kit.getScreenSize();
     int screenWidth=screenDimension.width;
     int screenHeight=screenDimension.height;
-    frame.setSize(screenWidth/2,screenHeight/2);
+    frame.setSize(screenWidth,screenHeight);
     frame.setResizable(false);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setVisible(true);
