@@ -37,12 +37,14 @@ class Main{
     regularPanel.setLocation(500,25);
     frame.add(regularPanel);
 
+    //working with dropoutPanel
+    dropoutPanel=new JPanel();
+    dropoutPanel.setSize(200,600);
+    dropoutPanel.setBackground(Color.BLUE);
+    dropoutPanel.setLocation(600,25);
+    frame.add(dropoutPanel);
 
-
-
-
-
-
+    frame.setBackground(Color.CYAN);
     frame.setResizable(false);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setVisible(true);
