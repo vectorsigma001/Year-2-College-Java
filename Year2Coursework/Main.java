@@ -2,6 +2,7 @@
 import javax.swing.JFrame;
 import java.awt.Toolkit;
 import java.awt.Dimension;
+import java.awt.Font;
 
 //making it look beautiful 
 import java.awt.Color;
@@ -35,11 +36,14 @@ class Main{
     studentPanel=new JPanel();
     studentPanel.setSize(350,600);
     studentPanel.setBackground(new Color(155,66,245));
+    studentPanel.setLayout(null);
     studentPanel.setLocation(20,25);
     //studentPanel components
     studentName=new JLabel("StudentName");
+    studentName.setBounds(10,80,80,20);
+    studentName.setFont(Font.BOLD);
     TextField studentNameTf=new TextField("Student Name");
-    studentNameTf.setBounds(20,150,30,20);
+    studentNameTf.setBounds(150,80,150,20);
     studentPanel.add(studentName);
     studentPanel.add(studentNameTf);
 
