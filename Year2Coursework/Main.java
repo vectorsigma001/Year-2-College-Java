@@ -6,6 +6,10 @@ import java.awt.Dimension;
 //making it look beautiful 
 import java.awt.Color;
 
+//events
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -36,21 +40,34 @@ class Main{
     regularPanel.setBackground(new Color(155,66,245));
     regularPanel.setLocation(450,25);
     frame.add(regularPanel);
-
+   
     //working with dropoutPanel
     dropoutPanel=new JPanel();
     dropoutPanel.setSize(350,600);
     dropoutPanel.setBackground(new Color(155,66,245));
     dropoutPanel.setLocation(875,25);
     frame.add(dropoutPanel);
+
+   
+    //|$$$$$$$$$$$$$$$$$$$$$$$||Action listener||$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$/
+    //setting actionlistener for theme 
+    JButton changeUiColor=new JButton("Change Theme");
+    frame.add(changeUiColor);
+     changeUiColor.addActionListener(new ActionListener){
+    public void actionPerformed(ActionEvent e){
+        frame.setContentPane().setBackground(Color.WHITE);;
+    }
+  }
+
     
     frame.setLayout(null);
-    frame.setBackground(Color.BLACK);
+    frame.getContentPane().setBackground(Color.BLACK);
     frame.setResizable(false);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setVisible(true);
-  }
+  } 
   public static void main(String args[]){
     Main object=new Main();
   }
 }
+
