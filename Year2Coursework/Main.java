@@ -25,26 +25,27 @@ class Main{
 
     //working with studentPanel
     studentPanel=new JPanel();
-    studentPanel.setSize(400,600);
-    studentPanel.setBackground(Color.ORANGE);
-    studentPanel.setLocation(50,25);
+    studentPanel.setSize(350,600);
+    studentPanel.setBackground(new Color(155,66,245));
+    studentPanel.setLocation(20,25);
     frame.add(studentPanel);
     
     //working with regularPanel
     regularPanel=new JPanel();
-    regularPanel.setSize(400,600);
-    regularPanel.setBackground(new Color(0,128,128));
-    regularPanel.setLocation(500,25);
+    regularPanel.setSize(350,600);
+    regularPanel.setBackground(new Color(155,66,245));
+    regularPanel.setLocation(450,25);
     frame.add(regularPanel);
 
     //working with dropoutPanel
     dropoutPanel=new JPanel();
-    dropoutPanel.setSize(200,600);
-    dropoutPanel.setBackground(Color.BLUE);
-    dropoutPanel.setLocation(600,25);
+    dropoutPanel.setSize(350,600);
+    dropoutPanel.setBackground(new Color(155,66,245));
+    dropoutPanel.setLocation(875,25);
     frame.add(dropoutPanel);
-
-    frame.setBackground(Color.CYAN);
+    
+    frame.setLayout(null);
+    frame.setBackground(Color.BLACK);
     frame.setResizable(false);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setVisible(true);
