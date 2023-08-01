@@ -15,17 +15,22 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.TextField;
 
 
 import java.util.ArrayList;
 
+//options libraries
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 class Main{
   JFrame frame;
   JPanel studentPanel,regularPanel,dropoutPanel;
   //forstudent
-  JLabel studentNamelb,dateOfBirthlb,courseNamelb,enrollmentIDlb,dateOfEnrollmentlb1,dateOfEnrollmentlb2,courseDurationlb,tuitionFeelb;
+  JLabel studentNamelb,dateOfBirthlb,courseNamelb,enrollmentIDlb,dateOfEnrollmentlb1,dateOfEnrollmentlb2,courseDurationlb1,courseDurationlb2,tuitionFeelb;
   
 
   JComboBox<String> yearDobComboBox;
@@ -33,9 +38,17 @@ class Main{
   JComboBox<String> dayDobComboBox;
 
   JComboBox<String> yearDoeComboBox;
-  JComboBox<String> monthDoeCombox;
+  JComboBox<String> monthDoeComboBox;
   JComboBox<String> dayDoeComboBox;
+  JButton addStudentbt,clearButtonbt,displayButtonbt;
   public Main(){
+    try{
+     UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+    }
+    catch(Exception e){
+      JOptionPane.showMessageDialog(frame,"This OS doesnot support this look");
+    }
+
     frame=new JFrame("college Coursework");
     Toolkit kit=Toolkit.getDefaultToolkit();
     Dimension screenDimension=kit.getScreenSize();
@@ -119,7 +132,7 @@ class Main{
     studentPanel.add(courseNamelb);
     TextField courseNametf=new TextField("Course Name");
     courseNametf.setFont(new Font("Arial",Font.PLAIN,14));
-    courseNametf.setBounds(140,160,100,20);
+    courseNametf.setBounds(140,160,120,20);
     studentPanel.add(courseNametf);
     
     //studentPanel enrollmentID
@@ -130,7 +143,7 @@ class Main{
     studentPanel.add(enrollmentIDlb);
     TextField enrollmentIdtf=new TextField("Enrollment Id");
     enrollmentIdtf.setFont(new Font("Arial",Font.PLAIN,14));
-    enrollmentIdtf.setBounds(140,200,100,20);
+    enrollmentIdtf.setBounds(140,200,120,20);
     studentPanel.add(enrollmentIdtf);
 
     //studentPanel DateOfEnrollment
@@ -150,21 +163,64 @@ class Main{
      for(String year1:years){
       yearDoeComboBox.addItem(year1);
     }
-    monthDoeCombox=new JComboBox<>();
+    yearDoeComboBox.setBounds(140,260, 60, 20);
+    studentPanel.add(yearDoeComboBox);
+    monthDoeComboBox=new JComboBox<>();
     for(String month1:months){
       monthDoeComboBox.addItem(month1);
     }
+    monthDoeComboBox.setBounds(210, 260, 70, 20);
+    studentPanel.add(monthDoeComboBox);
     dayDoeComboBox=new JComboBox<>();
     for(String day1:days){
       dayDoeComboBox.addItem(day1);
     }
+    dayDoeComboBox.setBounds(290,260,60,20);
+    studentPanel.add(dayDoeComboBox);
 
+    //studentPanel courseDurationlb
+    courseDurationlb1=new JLabel("Course");
+    courseDurationlb1.setFont(new Font("Arial",Font.BOLD,14));
+    courseDurationlb1.setForeground(Color.WHITE);
+    courseDurationlb1.setBounds(10,300,100,20);
+    studentPanel.add(courseDurationlb1);
+    courseDurationlb2=new JLabel("Duration:");
+    courseDurationlb2.setFont(new Font("Arial",Font.BOLD,14));
+    courseDurationlb2.setForeground(Color.WHITE);
+    courseDurationlb2.setBounds(10,320,100,20);
+    studentPanel.add(courseDurationlb2);
+    TextField courseDurationtf=new TextField("Course Duration");
+    courseDurationtf.setFont(new Font("Arial",Font.PLAIN,14));
+    courseDurationtf.setBounds(140,320,120,20);
+    studentPanel.add(courseDurationtf);
 
+    //studentPanel Tuition Feelb
+    tuitionFeelb=new JLabel("Tuition Fee:");
+    tuitionFeelb.setFont(new Font("Arial",Font.BOLD,14));
+    tuitionFeelb.setForeground(Color.WHITE);
+    tuitionFeelb.setBounds(10,360,100,20);
+    studentPanel.add(tuitionFeelb);
+    TextField tuitionFeetf=new TextField("Tuition Fee");
+    tuitionFeetf.setFont(new Font("Arial",Font.PLAIN,14));
+    tuitionFeetf.setBounds(140,360,120,20);
+    studentPanel.add(tuitionFeetf);
+   
 
+    //configuring button in student Panel
+    addStudentbt=new JButton("Add Student");
+    addStudentbt.setFont(new Font("Arial",Font.BOLD,14));
+    addStudentbt.setBounds(10,440,140,20);
+    studentPanel.add(addStudentbt);
 
-
-
-
+    clearButtonbt=new JButton("Clear");
+    clearButtonbt.setFont(new Font("Arial",Font.BOLD,14));
+    clearButtonbt.setBounds(180,440,140,20);
+    studentPanel.add(clearButtonbt);
+   
+    displayButtonbt=new JButton("Display");
+    displayButtonbt.setFont(new Font("Arial",Font.BOLD,14));
+    displayButtonbt.setBounds(100,480,140,20);
+    studentPanel.add(displayButtonbt); 
 
 
 
@@ -200,8 +256,31 @@ class Main{
   } 
   public static void main(String args[]){
     Main object=new Main();
+
   }
 }
+
+
+
+/* 
+//setting actionlistener for theme 
+    JButton changeUiColor=new JButton("Change Theme");
+    changeUiColor.setBounds(450, 700, 150, 30);
+    changeUiColor.setBackground(Color.GREEN);
+    frame.add(changeUiColor);
+    changeUiColor.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent e){
+        Color themeColorcheck=frame.getContentPane().getBackground();
+        if(themeColorcheck.equals(Color.BLACK)){
+          frame.getContentPane().setBackground(Color.WHITE);
+        }
+        else if(themeColorcheck.equals(Color.BLACK)){
+            frame.getContentPane().setBackground(Color.BLACK);
+        }
+    }
+  });
+
+  */
 
 
 
