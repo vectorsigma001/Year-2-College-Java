@@ -304,10 +304,11 @@ class Main{
     
     displayStudentButtonbt.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e){
+        String students="";
         for(Student object:studental){
-          object.display();
+          students+=object.toString()+"\n";
         }
-        JOptionPane.showMessageDialog(frame);
+        JOptionPane.showMessageDialog(frame,students);
       }
     });
 
@@ -465,7 +466,24 @@ class Student{
     System.out.println("Tuitio Fee is"+tuitionFee);
 
   }
+  @Override
+  public String toString(){
+    return "Student Name is "+studentName+"\n"+
+           "Date of Birth is "+dateOfBirth+"\n"+
+           "Course Name is "+courseName+"\n"+
+          "Enrollment Id is "+enrollmentId+"\n"+
+          "Date Of Enrollment is"+dateOfEnrollment+"\n"+
+          "Course Duration is"+courseDuration+"\n"+
+          "Tuition Fee is"+tuitionFee;
+  }
 }
+
+
+
+
+
+
+
 
 
 
