@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -27,6 +28,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 class Main{
+  static final int INVALID=-1;
   JFrame frame;
   JPanel studentPanel,regularPanel,dropoutPanel;
   //forstudent
@@ -40,7 +42,8 @@ class Main{
   JComboBox<String> yearDoeComboBox;
   JComboBox<String> monthDoeComboBox;
   JComboBox<String> dayDoeComboBox;
-  JButton addStudentbt,clearButtonbt,displayButtonbt;
+  JButton addStudentbt,clearStudentButtonbt,displayStudentButtonbt;
+  TextField studentNameTf,courseNametf,enrollmentIdtf,courseDurationtf,tuitionFeetf;
   public Main(){
     try{
      UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -212,15 +215,15 @@ class Main{
     addStudentbt.setBounds(10,440,140,20);
     studentPanel.add(addStudentbt);
 
-    clearButtonbt=new JButton("Clear");
-    clearButtonbt.setFont(new Font("Arial",Font.BOLD,14));
-    clearButtonbt.setBounds(180,440,140,20);
-    studentPanel.add(clearButtonbt);
+    clearStudentButtonbt=new JButton("Clear");
+    clearStudentButtonbt.setFont(new Font("Arial",Font.BOLD,14));
+    clearStudentButtonbt.setBounds(180,440,140,20);
+    studentPanel.add(clearStudentButtonbt);
    
-    displayButtonbt=new JButton("Display");
-    displayButtonbt.setFont(new Font("Arial",Font.BOLD,14));
-    displayButtonbt.setBounds(100,480,140,20);
-    studentPanel.add(displayButtonbt); 
+    displayStudentButtonbt=new JButton("Display");
+    displayStudentButtonbt.setFont(new Font("Arial",Font.BOLD,14));
+    displayStudentButtonbt.setBounds(100,480,140,20);
+    studentPanel.add(displayStudentButtonbt); 
 
 
 
@@ -243,10 +246,6 @@ class Main{
     dropoutPanel.setLocation(875,25);
     frame.add(dropoutPanel);
 
-   
-    //|$$$$$$$$$$$$$$$$$$$$$$$||Action listener||$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$/
-    
-
     
     frame.setLayout(null);
     frame.getContentPane().setBackground(Color.BLACK);
@@ -254,11 +253,166 @@ class Main{
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setVisible(true);
   } 
+  //|$$$$$$$$$$$$$$$$$$$$$$$||Getter method for all the components||$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$/
+      
+     //getter method for name
+
+  
+  public String getStudentName(){
+      String studentname=studentNameTf.getText();
+      if(studentname.equals("")){
+          JOptionPane.showMessageDialog(studentPanel,"PLease select your name");
+      }
+      return studentname;          
+  }
+  //getter method for date of birth
+  public String getStudentDateOfBirth(){
+      String year=yearDobComboBox.getSelectedItem().toString();
+      String month=monthDobComboBox.getSelectedItem().toString();
+      String day=dayDobComboBox.getSelectedItem().toString();
+      String dateOfBirth=null;
+      //turn it into 
+      //if(year.equals("Year")||month.equals("Month")||day.equals("Day")
+      if(year.equals("Year")||month.equals("Month")||day.equals("Day")){
+          dateOfBirth=null;
+      }
+      else{
+       dateOfBirth=
+          year+"\n"+
+          month+"\n"+
+          day+"\n"
+      ;
+      }
+      return dateOfBirth;
+  }
+  //getter method for courseName
+  public String getStudentCourseName(){
+    String studentCourseName=courseNametf.getText();
+    if(studentCourseName.equals("")){
+      JOptionPane.showMessageDialog(studentPanel,"Select Your CourseName");
+    }
+    return studentCourseName;
+  }
+  //getter method for get EnrollmentID
+  public int getStudentEnrollmentId(){
+    int newStudentEnrollmentId=INVALID;
+    String studentenrollmentId=enrollmentIdtf.getText().trim();
+    try{
+      newStudentEnrollmentId=Integer.parseInt(studentenrollmentId);
+      if(newStudentEnrollmentId<=0){
+        newStudentEnrollmentId=INVALID;
+      }
+      else{
+        return newStudentEnrollmentId;
+      }
+    }     
+    catch(NumberFormatException e){
+
+    }
+    return newStudentEnrollmentId;
+  }
+  //getter method for dateOfEnrollment
+  public String getStudentDateOfEnrollment(){
+      String year=yearDoeComboBox.getSelectedItem().toString();
+      String month=monthDoeComboBox.getSelectedItem().toString();
+      String day=dayDoeComboBox.getSelectedItem().toString();
+      String dateOfEnrollment=null;
+      //turn it into 
+      //if(year.equals("Year")||month.equals("Month")||day.equals("Day")
+      if(year.equals("Year")||month.equals("Month")||day.equals("Day")){
+          dateOfEnrollment=null;
+      }
+      else{
+       dateOfEnrollment=
+          year+"\n"+
+          month+"\n"+
+          day+"\n"
+      ;
+      }
+      return dateOfEnrollment;
+  }
+  //getter method for courseDuration
+    public int getStudentCourseDuration(){
+    int newStudentCourseDuration=INVALID;
+    String studentCourseDuration=courseDurationtf.getText().trim();
+    try{
+      newStudentCourseDuration=Integer.parseInt(studentCourseDuration);
+      if(newStudentCourseDuration<=0){
+        newStudentCourseDuration=INVALID;
+      }
+      else{
+        return newStudentCourseDuration;
+      }
+    }     
+    catch(NumberFormatException e){
+
+    }
+    return newStudentCourseDuration;
+  }
+  //getter method for tuitionFee
+  public int getStudentTuitionFee(){
+    int newStudentTuitionFee=INVALID;
+    String StudentTuitionFee=tuitionFeetf.getText().trim();
+    try{
+      newStudentTuitionFee=Integer.parseInt(StudentTuitionFee);
+      if(newStudentTuitionFee<=0){
+        newStudentTuitionFee=INVALID;
+      }
+      else{
+        return newStudentTuitionFee;
+      }
+    }     
+    catch(NumberFormatException e){
+
+    }
+    return newStudentTuitionFee;
+
+
+  
+  
+  
+  //|$$$$$$$$$$$$$$$$$$$$$$$||Action listener||$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$/
+
+  addStudentbt.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e){
+      String courseName=getStudentCourseName();
+      if(courseName=="")
+          JOptionPane.showMessageDialog(studentPanel,"Give your Coursename");
+          return;
+    }
+  });
+
+
+}
+
+
+
+
+
+  
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   public static void main(String args[]){
     Main object=new Main();
 
   }
 }
+
 
 
 
