@@ -11,7 +11,6 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -76,7 +75,7 @@ class Main{
     studentNamelb.setBounds(10,80,100,20);
     studentNamelb.setFont(new Font("Arial",Font.BOLD,14));
     studentNamelb.setForeground(Color.WHITE);
-    TextField studentNameTf=new TextField("Student Name");
+    TextField studentNameTf=new TextField();
     studentNameTf.setBounds(140,80,120,20);
     studentNameTf.setFont(new Font("Arial",Font.PLAIN,14));
     studentPanel.add(studentNamelb);
@@ -133,7 +132,7 @@ class Main{
     courseNamelb.setForeground(Color.WHITE);
     courseNamelb.setBounds(10, 160,100,20);
     studentPanel.add(courseNamelb);
-    TextField courseNametf=new TextField("Course Name");
+    TextField courseNametf=new TextField();
     courseNametf.setFont(new Font("Arial",Font.PLAIN,14));
     courseNametf.setBounds(140,160,120,20);
     studentPanel.add(courseNametf);
@@ -144,7 +143,7 @@ class Main{
     enrollmentIDlb.setForeground(Color.WHITE);
     enrollmentIDlb.setBounds(10,200,100,20);
     studentPanel.add(enrollmentIDlb);
-    TextField enrollmentIdtf=new TextField("Enrollment Id");
+    TextField enrollmentIdtf=new TextField();
     enrollmentIdtf.setFont(new Font("Arial",Font.PLAIN,14));
     enrollmentIdtf.setBounds(140,200,120,20);
     studentPanel.add(enrollmentIdtf);
@@ -192,7 +191,7 @@ class Main{
     courseDurationlb2.setForeground(Color.WHITE);
     courseDurationlb2.setBounds(10,320,100,20);
     studentPanel.add(courseDurationlb2);
-    TextField courseDurationtf=new TextField("Course Duration");
+    TextField courseDurationtf=new TextField();
     courseDurationtf.setFont(new Font("Arial",Font.PLAIN,14));
     courseDurationtf.setBounds(140,320,120,20);
     studentPanel.add(courseDurationtf);
@@ -203,7 +202,7 @@ class Main{
     tuitionFeelb.setForeground(Color.WHITE);
     tuitionFeelb.setBounds(10,360,100,20);
     studentPanel.add(tuitionFeelb);
-    TextField tuitionFeetf=new TextField("Tuition Fee");
+    TextField tuitionFeetf=new TextField();
     tuitionFeetf.setFont(new Font("Arial",Font.PLAIN,14));
     tuitionFeetf.setBounds(140,360,120,20);
     studentPanel.add(tuitionFeetf);
@@ -252,6 +251,50 @@ class Main{
     frame.setResizable(false);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setVisible(true);
+
+     //|$$$$$$$$$$$$$$$$$$$$$$$||Action listener||$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$/
+
+    addStudentbt.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e){
+        String studentName=getStudentName();
+        if(studentName.equals("")){
+            JOptionPane.showMessageDialog(frame,"Give your Coursename");
+            return;
+      }
+        String dataOfBirth=getStudentDateOfBirth();
+        if(dataOfBirth.equals("")){
+          JOptionPane.showMessageDialog(frame,"Select your year month and date");
+          return;
+        }
+        String courseName=getStudentCourseName();
+        if(courseName.equals("")){
+          JOptionPane.showMessageDialog(frame,"Select your CourseName");
+          return;
+        }
+        int enrollmentId=getStudentEnrollmentId();
+        if(enrollmentId==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select proper enrollment id");
+        }
+        String dateOfEnrollment=getStudentDateOfEnrollment();
+        if(dateOfEnrollment.equals("")){
+          JOptionPane.showMessageDialog(frame,"Select your date of enrollment");
+        }
+        int CourseDuration=getStudentCourseDuration();
+        if(CourseDuration==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select your Course Duration");
+          }
+        int TuitionFee=getStudentTuitionFee();
+        if(TuitionFee==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select your Tuition Fee");
+        }
+      }  
+    });
+    
+
+  
+
+
+
   } 
   //|$$$$$$$$$$$$$$$$$$$$$$$||Getter method for all the components||$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$/
       
@@ -366,52 +409,30 @@ class Main{
 
     }
     return newStudentTuitionFee;
+  }
 
-
-  
-  
-  
-  //|$$$$$$$$$$$$$$$$$$$$$$$||Action listener||$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$/
-
-  addStudentbt.addActionListener(new ActionListener() {
-    public void actionPerformed(ActionEvent e){
-      String courseName=getStudentCourseName();
-      if(courseName=="")
-          JOptionPane.showMessageDialog(studentPanel,"Give your Coursename");
-          return;
-    }
-  });
-
-
-}
-
-
-
-
-
-  
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  public static void main(String args[]){
+   public static void main(String args[]){
     Main object=new Main();
 
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
