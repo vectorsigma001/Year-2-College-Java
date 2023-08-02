@@ -100,3 +100,4 @@ class Dropout extends Student
     System.out.println("Remaining amount: "+remainingAmount);
     }
 }
+//ujyg
