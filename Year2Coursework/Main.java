@@ -15,8 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
+import javax.swing.JOptionPane; 
 import java.awt.TextField;
 
 
@@ -311,6 +310,48 @@ class Main{
         JOptionPane.showMessageDialog(frame,students);
       }
     });
+  /////////////////////////////working with regularPanel///////////////////////////////////////////////////////
+  regularPanel.add(studentNamelb);
+  regularPanel.add(dateOfBirthlb);
+  regularPanel.add(courseNamelb);
+  regularPanel.add(enrollmentIDlb);
+  regularPanel.add(dateOfEnrollmentlb1);
+  regularPanel.add(dateOfEnrollmentlb2);
+  regularPanel.add(courseDurationlb1);
+  regularPanel.add(courseDurationlb2);
+  regularPanel.add(tuitionFeelb);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
 
@@ -431,11 +472,45 @@ class Main{
     }
     return newStudentTuitionFee;
   }
+  /////////////////////////////working with studentPanel///////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
    public static void main(String args[]){
     Main object=new Main();
   }
 }
+
+
 
 
 //creating Student class
@@ -477,6 +552,10 @@ class Student{
           "Tuition Fee is"+tuitionFee;
   }
 }
+
+
+
+
 
 
 
