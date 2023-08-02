@@ -43,6 +43,8 @@ class Main{
   JComboBox<String> dayDoeComboBox;
   JButton addStudentbt,clearStudentButtonbt,displayStudentButtonbt;
   TextField studentNameTf,courseNametf,enrollmentIdtf,courseDurationtf,tuitionFeetf;
+  //storing date of student class in a arraylist
+  ArrayList<Student> studental=new ArrayList<>();
   public Main(){
     try{
      UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -223,6 +225,7 @@ class Main{
     displayStudentButtonbt.setFont(new Font("Arial",Font.BOLD,14));
     displayStudentButtonbt.setBounds(100,480,140,20);
     studentPanel.add(displayStudentButtonbt); 
+    displayStudentButtonbt.setVisible(false);
 
 
 
@@ -281,19 +284,32 @@ class Main{
           JOptionPane.showMessageDialog(frame,"Select your date of enrollment");
           return;
         }
-        int CourseDuration=getStudentCourseDuration();
-        if(CourseDuration==INVALID){
+        int courseDuration=getStudentCourseDuration();
+        if(courseDuration==INVALID){
           JOptionPane.showMessageDialog(frame,"Select your Course Duration");
           return;
           }
-        int TuitionFee=getStudentTuitionFee();
-        if(TuitionFee==INVALID){
+        int tuitionFee=getStudentTuitionFee();
+        if(tuitionFee==INVALID){
           JOptionPane.showMessageDialog(frame,"Select your Tuition Fee");
           return;
         }
+
+        Student s1=new Student(studentName, dataOfBirth, courseName, enrollmentId, dateOfEnrollment, courseDuration, tuitionFee);
+        studental.add(s1);
+        JOptionPane.showMessageDialog(studentPanel,"Student record successfully recorded");
+        displayStudentButtonbt.setVisible(true);
       }  
     });
     
+    displayStudentButtonbt.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e){
+        for(Student object:studental){
+          object.display();
+        }
+        JOptionPane.showMessageDialog(frame);
+      }
+    });
 
   
 
@@ -320,7 +336,7 @@ class Main{
       String dateOfBirth=null;
       //turn it into 
       //if(year.equals("Year")||month.equals("Month")||day.equals("Day")
-      if(year.equals("Year")&&month.equals("Month")&&day.equals("Day")){
+      if(year.equals("Year")||month.equals("Month")||day.equals("Day")){
           dateOfBirth=null;
       }
       else{
@@ -419,6 +435,40 @@ class Main{
     Main object=new Main();
   }
 }
+
+
+//creating Student class
+class Student{
+  String studentName;
+  String dateOfBirth;
+  String courseName;
+  int enrollmentId;
+  String dateOfEnrollment;
+  int courseDuration;
+  int tuitionFee;
+  public Student(String studentName,String dateOfBirth,String courseName,int enrollmentId,String dateOfEnrollment,int courseDuration,int tuitionFee){
+    this.studentName=studentName;
+    this.dateOfBirth=dateOfBirth;
+    this.courseName=courseName;
+    this.enrollmentId=enrollmentId;
+    this.dateOfEnrollment=dateOfEnrollment;
+    this.courseDuration=courseDuration;
+    this.tuitionFee=tuitionFee;
+  }
+  public void display(){
+    System.out.println("Student Name is "+studentName);
+    System.out.println("Date of Birth is "+dateOfBirth);
+    System.out.println("Course Name is "+courseName);
+    System.out.println("Enrollment Id is "+enrollmentId);
+    System.out.println("Date Of Enrollment is"+dateOfEnrollment);
+    System.out.println("Course Duration is"+courseDuration);
+    System.out.println("Tuitio Fee is"+tuitionFee);
+
+  }
+}
+
+
+
 
 
 
