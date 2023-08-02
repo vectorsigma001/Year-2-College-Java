@@ -75,7 +75,7 @@ class Main{
     studentNamelb.setBounds(10,80,100,20);
     studentNamelb.setFont(new Font("Arial",Font.BOLD,14));
     studentNamelb.setForeground(Color.WHITE);
-    TextField studentNameTf=new TextField();
+    studentNameTf=new TextField();
     studentNameTf.setBounds(140,80,120,20);
     studentNameTf.setFont(new Font("Arial",Font.PLAIN,14));
     studentPanel.add(studentNamelb);
@@ -132,7 +132,7 @@ class Main{
     courseNamelb.setForeground(Color.WHITE);
     courseNamelb.setBounds(10, 160,100,20);
     studentPanel.add(courseNamelb);
-    TextField courseNametf=new TextField();
+    courseNametf=new TextField();
     courseNametf.setFont(new Font("Arial",Font.PLAIN,14));
     courseNametf.setBounds(140,160,120,20);
     studentPanel.add(courseNametf);
@@ -143,7 +143,7 @@ class Main{
     enrollmentIDlb.setForeground(Color.WHITE);
     enrollmentIDlb.setBounds(10,200,100,20);
     studentPanel.add(enrollmentIDlb);
-    TextField enrollmentIdtf=new TextField();
+    enrollmentIdtf=new TextField();
     enrollmentIdtf.setFont(new Font("Arial",Font.PLAIN,14));
     enrollmentIdtf.setBounds(140,200,120,20);
     studentPanel.add(enrollmentIdtf);
@@ -191,7 +191,7 @@ class Main{
     courseDurationlb2.setForeground(Color.WHITE);
     courseDurationlb2.setBounds(10,320,100,20);
     studentPanel.add(courseDurationlb2);
-    TextField courseDurationtf=new TextField();
+    courseDurationtf=new TextField();
     courseDurationtf.setFont(new Font("Arial",Font.PLAIN,14));
     courseDurationtf.setBounds(140,320,120,20);
     studentPanel.add(courseDurationtf);
@@ -202,7 +202,7 @@ class Main{
     tuitionFeelb.setForeground(Color.WHITE);
     tuitionFeelb.setBounds(10,360,100,20);
     studentPanel.add(tuitionFeelb);
-    TextField tuitionFeetf=new TextField();
+    tuitionFeetf=new TextField();
     tuitionFeetf.setFont(new Font("Arial",Font.PLAIN,14));
     tuitionFeetf.setBounds(140,360,120,20);
     studentPanel.add(tuitionFeetf);
@@ -262,8 +262,8 @@ class Main{
             return;
       }
         String dataOfBirth=getStudentDateOfBirth();
-        if(dataOfBirth.equals("")){
-          JOptionPane.showMessageDialog(frame,"Select your year month and date");
+        if(dataOfBirth==null){
+          JOptionPane.showMessageDialog(frame,"Select your date of birth");
           return;
         }
         String courseName=getStudentCourseName();
@@ -274,18 +274,22 @@ class Main{
         int enrollmentId=getStudentEnrollmentId();
         if(enrollmentId==INVALID){
           JOptionPane.showMessageDialog(frame,"Select proper enrollment id");
+          return;
         }
         String dateOfEnrollment=getStudentDateOfEnrollment();
-        if(dateOfEnrollment.equals("")){
+        if(dateOfEnrollment==null){
           JOptionPane.showMessageDialog(frame,"Select your date of enrollment");
+          return;
         }
         int CourseDuration=getStudentCourseDuration();
         if(CourseDuration==INVALID){
           JOptionPane.showMessageDialog(frame,"Select your Course Duration");
+          return;
           }
         int TuitionFee=getStudentTuitionFee();
         if(TuitionFee==INVALID){
           JOptionPane.showMessageDialog(frame,"Select your Tuition Fee");
+          return;
         }
       }  
     });
@@ -316,7 +320,7 @@ class Main{
       String dateOfBirth=null;
       //turn it into 
       //if(year.equals("Year")||month.equals("Month")||day.equals("Day")
-      if(year.equals("Year")||month.equals("Month")||day.equals("Day")){
+      if(year.equals("Year")&&month.equals("Month")&&day.equals("Day")){
           dateOfBirth=null;
       }
       else{
@@ -413,61 +417,8 @@ class Main{
 
    public static void main(String args[]){
     Main object=new Main();
-
   }
 }
-
-
-
-
-
-
-
-/*
-Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException: Cannot invoke "java.awt.TextField.getText()" because "this.studentNameTf" is null
-        at Main.getStudentName(Main.java:305)
-        at Main$1.actionPerformed(Main.java:259)
-        at java.desktop/javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:1972)
-        at java.desktop/javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2313)
-        at java.desktop/javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:405)
-        at java.desktop/javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:262)
-        at java.desktop/javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:279)
-        at java.desktop/java.awt.Component.processMouseEvent(Component.java:6620)
-        at java.desktop/javax.swing.JComponent.processMouseEvent(JComponent.java:3398)
-        at java.desktop/java.awt.Component.processEvent(Component.java:6385)
-        at java.desktop/java.awt.Container.processEvent(Container.java:2266)
-        at java.desktop/java.awt.Component.dispatchEventImpl(Component.java:4995)
-        at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2324)
-        at java.desktop/java.awt.Component.dispatchEvent(Component.java:4827)
-        at java.desktop/java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4948)
-        at java.desktop/java.awt.LightweightDispatcher.processMouseEvent(Container.java:4575)
-        at java.desktop/java.awt.LightweightDispatcher.dispatchEvent(Container.java:4516)
-        at java.desktop/java.awt.Container.dispatchEventImpl(Container.java:2310)
-        at java.desktop/java.awt.Window.dispatchEventImpl(Window.java:2780)
-        at java.desktop/java.awt.Component.dispatchEvent(Component.java:4827)
-        at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:775)
-        at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:720)
-        at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:714)
-        at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-        at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)
-        at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:97)
-        at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:747)
-        at java.desktop/java.awt.EventQueue$5.run(EventQueue.java:745)
-        at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
-        at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)
-        at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:744)
-        at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
-        at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
-        at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
-        at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
-        at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
-        at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
-
-
-
-
-
-
 
 
 
