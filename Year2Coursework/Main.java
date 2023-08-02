@@ -419,24 +419,6 @@ class Main{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 
 //setting actionlistener for theme 
     JButton changeUiColor=new JButton("Change Theme");
@@ -456,8 +438,3 @@ class Main{
   });
 
   */
-
-
-
-
-
