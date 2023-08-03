@@ -410,11 +410,11 @@ class Main{
         ////////////////////////display button on regular panel
         displayRegularButtonbt.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e){
-        String students="";
+        String regularStudent="";
         for(Student object:studental){
-          reg+=object.toString()+"\n";
+          regularStudent+=object.toString()+"\n";
         }
-        JOptionPane.showMessageDialog(frame,reg);
+        JOptionPane.showMessageDialog(frame,regularStudent);
       }
     });
       
@@ -695,4 +695,7 @@ class RegularStudent extends Student{
     "\nDays Present:"+daysPresent;
   }
 }
+
+
+
 
