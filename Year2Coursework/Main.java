@@ -362,6 +362,12 @@ class Main{
     regularPanel.add(dayPresentlb);
     regularPanel.add(numOfDaysPresenttf);
 
+    /////////////////////////CONFIG REGULAR BUTTON
+    addRegularbt=new JButton("Add Regular");
+    addRegularbt.setFont(new Font("Arial",Font.BOLD,14));
+    addRegularbt.setBounds(10,200,140,20);
+    regularPanel.add(addRegularbt);
+
     ///////////////////////////////ACTION LISTENER FOR REGULAR CLASS////////////////////////////////////////////////////
     addRegularbt.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e){
@@ -562,6 +568,86 @@ class Main{
     }
     return newRegularDaysPresent;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   public static void main(String args[]){
+    Main object=new Main();
+  }
+}
+
+
+
+
+//creating Student class
+class Student{
+  String studentName;
+  String dateOfBirth;
+  String courseName;
+  int enrollmentId;
+  String dateOfEnrollment;
+  int courseDuration;
+  int tuitionFee;
+  public Student(String studentName,String dateOfBirth,String courseName,int enrollmentId,String dateOfEnrollment,int courseDuration,int tuitionFee){
+    this.studentName=studentName;
+    this.dateOfBirth=dateOfBirth;
+    this.courseName=courseName;
+    this.enrollmentId=enrollmentId;
+    this.dateOfEnrollment=dateOfEnrollment;
+    this.courseDuration=courseDuration;
+    this.tuitionFee=tuitionFee;
+  }
+  public void display(){
+    System.out.println("Student Name is "+studentName);
+    System.out.println("Date of Birth is "+dateOfBirth);
+    System.out.println("Course Name is "+courseName);
+    System.out.println("Enrollment Id is "+enrollmentId);
+    System.out.println("Date Of Enrollment is"+dateOfEnrollment);
+    System.out.println("Course Duration is"+courseDuration);
+    System.out.println("Tuitio Fee is"+tuitionFee);
+
+  }
+  @Override
+  public String toString(){
+    return "Student Name is "+studentName+"\n"+
+           "Date of Birth is "+dateOfBirth+"\n"+
+           "Course Name is "+courseName+"\n"+
+          "Enrollment Id is "+enrollmentId+"\n"+
+          "Date Of Enrollment is"+dateOfEnrollment+"\n"+
+          "Course Duration is"+courseDuration+"\n"+
+          "Tuition Fee is"+tuitionFee;
+  }
+}
+
+
 
 
 
