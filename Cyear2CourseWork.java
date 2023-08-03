@@ -47,7 +47,7 @@ class Main{
   //for regular
   JLabel numOfModuleslb,numOfCreditHourslb,dayPresentlb;
   TextField numOfModulestf,numOfCreditHourstf,numOfDaysPresenttf;
-  JButton addRegularbt,displayRegularButtonbt;
+  JButton addRegularbt,displayRegularButtonbt,presentPercentageButton;
   //storing data of regular class in a arraylist
   ArrayList<RegularStudent> regularal=new ArrayList<>();
 
@@ -374,6 +374,12 @@ class Main{
     displayRegularButtonbt.setBounds(170,200,140,20);
     regularPanel.add(displayRegularButtonbt);
 
+    presentPercentageButton=new JButton("Present Percentage");
+    presentPercentageButton.setFont(new Font("Arial",Font.BOLD,14));
+    presentPercentageButton.setBounds(90,250,180,20);
+    regularPanel.add(presentPercentageButton);
+
+
     ///////////////////////////////ACTION LISTENER FOR REGULAR CLASS////////////////////////////////////////////////////
     addRegularbt.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e){
@@ -409,7 +415,12 @@ class Main{
         regularal.add(reg);
         JOptionPane.showMessageDialog(frame,"Regular student record successfully recorded");
         
-        ////////////////////////display button on regular panel
+        
+      
+      
+      }  
+    });
+      ////////////////////////display button on regular panel
         displayRegularButtonbt.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e){
         String regularStudent="";
@@ -419,9 +430,11 @@ class Main{
         JOptionPane.showMessageDialog(frame,regularStudent);
       }
     });
-      
-      
-      }  
+    ///////////////////////////////////////////////presentPercentagebuttonactionlistener/////////////////////////////////////////////
+    presentPercentageButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e){
+       
+      }
     });
     
     
@@ -697,3 +710,18 @@ class RegularStudent extends Student{
     "\nDays Present:"+daysPresent;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
