@@ -44,6 +44,17 @@ class Main{
   TextField studentNameTf,courseNametf,enrollmentIdtf,courseDurationtf,tuitionFeetf;
   //storing date of student class in a arraylist
   ArrayList<Student> studental=new ArrayList<>();
+  //for regular
+  JLabel numOfModuleslb,numOfCreditHourslb,dayPresentlb;
+  TextField numOfModulestf,numOfCreditHourstf,numOfDaysPresenttf;
+  JButton addRegularbt;
+  
+
+
+
+
+
+
   public Main(){
     try{
      UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -237,8 +248,12 @@ class Main{
     regularPanel=new JPanel();
     regularPanel.setSize(350,600);
     regularPanel.setBackground(new Color(155,66,245));
+    regularPanel.setLayout(null);
     regularPanel.setLocation(450,25);
     frame.add(regularPanel);
+    
+    
+  
    
     //working with dropoutPanel
     dropoutPanel=new JPanel();
@@ -311,49 +326,52 @@ class Main{
       }
     });
   /////////////////////////////working with regularPanel///////////////////////////////////////////////////////
-  regularPanel.add(studentNamelb);
-  regularPanel.add(dateOfBirthlb);
-  regularPanel.add(courseNamelb);
-  regularPanel.add(enrollmentIDlb);
-  regularPanel.add(dateOfEnrollmentlb1);
-  regularPanel.add(dateOfEnrollmentlb2);
-  regularPanel.add(courseDurationlb1);
-  regularPanel.add(courseDurationlb2);
-  regularPanel.add(tuitionFeelb);
+     
+// Components for the regularPanel
+          
+    //Number of Modules Label and Textfield
+    numOfModuleslb=new JLabel("Number of Modules:");
+    numOfModuleslb.setBounds(10,80,150,20);
+    numOfModuleslb.setFont(new Font("Arial",Font.BOLD,14));
+    numOfModuleslb.setForeground(Color.WHITE);
+    numOfModulestf=new TextField();
+    numOfModulestf.setBounds(190,80,120,20);
+    numOfModulestf.setFont(new Font("Arial",Font.PLAIN,14));
+    regularPanel.add(numOfModuleslb);
+    regularPanel.add(numOfModulestf);
 
+    //Number of Credit Hours Label and Textfield
+    numOfCreditHourslb=new JLabel("Number of Credit Hours:");
+    numOfCreditHourslb.setBounds(10,120,170,20);
+    numOfCreditHourslb.setFont(new Font("Arial",Font.BOLD,14));
+    numOfCreditHourslb.setForeground(Color.WHITE);
+    numOfCreditHourstf=new TextField();
+    numOfCreditHourstf.setBounds(190,120,120,20);
+    numOfCreditHourstf.setFont(new Font("Arial",Font.PLAIN,14));
+    regularPanel.add(numOfCreditHourslb);
+    regularPanel.add(numOfCreditHourstf);
 
+    //Number of Days Present Label and Textfield
+    dayPresentlb=new JLabel("Number of Days Present:");
+    dayPresentlb.setBounds(10,160,180,20);
+    dayPresentlb.setFont(new Font("Arial",Font.BOLD,14));
+    dayPresentlb.setForeground(Color.WHITE);
+    numOfDaysPresenttf=new TextField();
+    numOfDaysPresenttf.setBounds(190,160,120,20);
+    numOfDaysPresenttf.setFont(new Font("Arial",Font.PLAIN,14));
+    regularPanel.add(dayPresentlb);
+    regularPanel.add(numOfDaysPresenttf);
+    
+    addRegularbt.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e){
+        
+      }
+    });
+    
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 
 
 
@@ -472,8 +490,60 @@ class Main{
     }
     return newStudentTuitionFee;
   }
-  /////////////////////////////working with studentPanel///////////////////////////////////////////////////////
+  /////////////////////////////working with regularPanel getter methodl///////////////////////////////////////////////////////
+  //getter method for numofModules
+  public int getRegularNumOfModules(){
+    int newRegularNumOfModules=INVALID;
+    String regularNumOfModules=numOfModulestf.getText().trim();
+    try{
+      newRegularNumOfModules=Integer.parseInt(regularNumOfModules);
+      if(newRegularNumOfModules<=0){
+        newRegularNumOfModules=INVALID;
+      }
+      else{
+        return newRegularNumOfModules;
+      }
+    }     
+    catch(NumberFormatException e){
 
+    }
+    return newRegularNumOfModules;
+  }
+  //getter method for numOfCreditHours
+  public int getRegularNumOfCreditHours(){
+    int newRegularNumOfCreditHours=INVALID;
+    String regularNumOfCreditHours=numOfCreditHourstf.getText().trim();
+    try{
+      newRegularNumOfCreditHours=Integer.parseInt(regularNumOfCreditHours);
+      if(newRegularNumOfCreditHours<=0){
+        newRegularNumOfCreditHours=INVALID;
+      }
+      else{
+        return newRegularNumOfCreditHours;
+      }
+    }     
+    catch(NumberFormatException e){
+
+    }
+    return newRegularNumOfCreditHours;
+  }
+  public double getRegularDaysPresent(){
+    int newRegularDaysPresent=INVALID;
+    String regularDaysPresent=numOfDaysPresenttf.getText().trim();
+    try{
+      newRegularDaysPresent=Integer.parseInt(regularDaysPresent);
+      if(newRegularDaysPresent<=0){
+        newRegularDaysPresent=INVALID;
+      }
+      else{
+        return newRegularDaysPresent;
+      }
+    }     
+    catch(NumberFormatException e){
+
+    }
+    return newRegularDaysPresent;
+  }
 
 
 
@@ -552,22 +622,6 @@ class Student{
           "Tuition Fee is"+tuitionFee;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 
 //setting actionlistener for theme 
