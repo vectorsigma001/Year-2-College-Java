@@ -47,7 +47,7 @@ class Main{
   //for regular
   JLabel numOfModuleslb,numOfCreditHourslb,dayPresentlb;
   TextField numOfModulestf,numOfCreditHourstf,numOfDaysPresenttf;
-  JButton addRegularbt;
+  JButton addRegularbt,displayRegularButtonbt;
   
 
 
@@ -367,6 +367,11 @@ class Main{
     addRegularbt.setFont(new Font("Arial",Font.BOLD,14));
     addRegularbt.setBounds(10,200,140,20);
     regularPanel.add(addRegularbt);
+    /////////////////////////Config display button
+    displayRegularButtonbt=new JButton("Display Regular");
+    displayRegularButtonbt.setFont(new Font("Arial",Font.BOLD,14));
+    displayRegularButtonbt.setBounds(100,200,140,20);
+    regularPanel.add(displayRegularButtonbt);
 
     ///////////////////////////////ACTION LISTENER FOR REGULAR CLASS////////////////////////////////////////////////////
     addRegularbt.addActionListener(new ActionListener() {
@@ -389,7 +394,32 @@ class Main{
           JOptionPane.showMessageDialog(frame,"Select exact num of days Present");
           return;
         }
+        //////////////////geting values from studentPanel need to make changes here//////////////////////
+        String studentName=getStudentName();
+        String dateOfBirth=getStudentDateOfBirth();
+        String courseName=getStudentCourseName();
+        int enrollmentId=getStudentEnrollmentId();
+        String dateOfEnrollment=getStudentDateOfEnrollment();
+        int courseDuration=getStudentCourseDuration();
+        int tuitionFee=getStudentTuitionFee();
+
+        RegularStudent reg=new RegularStudent(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfModules,numOfCreditHours,numOfDaysPresent);
+        studental.add(reg);
+        JOptionPane.showMessageDialog(frame,"Regular student record successfully recorded");
+        
+        ////////////////////////display button on regular panel
+        displayRegularButtonbt.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e){
+        String students="";
+        for(Student object:studental){
+          reg+=object.toString()+"\n";
+        }
+        JOptionPane.showMessageDialog(frame,reg);
       }
+    });
+      
+      
+      }  
     });
     
     
@@ -646,3 +676,23 @@ class Student{
           "Tuition Fee is"+tuitionFee;
   }
 }
+
+class RegularStudent extends Student{
+  int numOfModules;
+  int numOfCreditHours;
+  double daysPresent;
+  public RegularStudent(String studentName,String dateOfBirth,String courseName,int enrollmentId,String dateOfEnrollment,int courseDuration,int tuitionFee,int numOfModules,int numOfCreditHours,double daysPresent){
+    super(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee);
+    this.numOfModules=numOfModules;
+    this.numOfCreditHours=numOfCreditHours;
+    this.daysPresent=daysPresent;
+  }
+  @Override
+  public String toString(){
+    return super.toString()+
+    "\nNumber of Modules:"+numOfModules+
+    "\nNumber of Credit Hours:"+numOfCreditHours+
+    "\nDays Present:"+daysPresent;
+  }
+}
+
