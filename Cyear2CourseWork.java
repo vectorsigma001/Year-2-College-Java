@@ -42,13 +42,14 @@ class Main{
   JComboBox<String> dayDoeComboBox;
   JButton addStudentbt,clearStudentButtonbt,displayStudentButtonbt;
   TextField studentNameTf,courseNametf,enrollmentIdtf,courseDurationtf,tuitionFeetf;
-  //storing date of student class in a arraylist
+  //storing data of student class in a arraylist
   ArrayList<Student> studental=new ArrayList<>();
   //for regular
   JLabel numOfModuleslb,numOfCreditHourslb,dayPresentlb;
   TextField numOfModulestf,numOfCreditHourstf,numOfDaysPresenttf;
   JButton addRegularbt,displayRegularButtonbt;
-  
+  //storing data of regular class in a arraylist
+  ArrayList<RegularStudent> regularal=new ArrayList<>();
 
 
 
@@ -370,7 +371,7 @@ class Main{
     /////////////////////////Config display button
     displayRegularButtonbt=new JButton("Display Regular");
     displayRegularButtonbt.setFont(new Font("Arial",Font.BOLD,14));
-    displayRegularButtonbt.setBounds(100,200,140,20);
+    displayRegularButtonbt.setBounds(170,200,140,20);
     regularPanel.add(displayRegularButtonbt);
 
     ///////////////////////////////ACTION LISTENER FOR REGULAR CLASS////////////////////////////////////////////////////
@@ -405,14 +406,15 @@ class Main{
 
         RegularStudent reg=new RegularStudent(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfModules,numOfCreditHours,numOfDaysPresent);
         studental.add(reg);
+        regularal.add(reg);
         JOptionPane.showMessageDialog(frame,"Regular student record successfully recorded");
         
         ////////////////////////display button on regular panel
         displayRegularButtonbt.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e){
         String regularStudent="";
-        for(Student object:studental){
-          regularStudent+=object.toString()+"\n";
+        for(RegularStudent regobject:regularal){
+          regularStudent+=regobject.toString()+"\n";
         }
         JOptionPane.showMessageDialog(frame,regularStudent);
       }
@@ -695,7 +697,3 @@ class RegularStudent extends Student{
     "\nDays Present:"+daysPresent;
   }
 }
-
-
-
-
