@@ -43,14 +43,23 @@ class Main{
   JButton addStudentbt,clearStudentButtonbt,displayStudentButtonbt;
   TextField studentNameTf,courseNametf,enrollmentIdtf,courseDurationtf,tuitionFeetf;
   //storing data of student class in a arraylist
+  ArrayList<Regular> regularal=new ArrayList<>();
   ArrayList<Student> studental=new ArrayList<>();
   //for regular
   JLabel numOfModuleslb,numOfCreditHourslb,dayPresentlb;
   TextField numOfModulestf,numOfCreditHourstf,numOfDaysPresenttf;
-  JButton addRegularbt,displayRegularButtonbt,presentPercentageButton;
+  JButton addRegularbt,displayRegularButtonbt,presentPercentageButton,grantCertificatebt,regularClearbt;
   //storing data of regular class in a arraylist
-  ArrayList<RegularStudent> regularal=new ArrayList<>();
+  
 
+  //working with dropoutclass
+  JLabel numOfRemainingModuleslb,numOfMonthsAttendedlb,dateofDropoutlb,remainingAmountlb;
+  TextField numOfRemainingModulestf,numOfMonthsAttendedtf,remainingAmount;
+  
+  JComboBox<String> yearDodComboBox;
+  JComboBox<String> monthDodComboBox;
+  JComboBox<String> dayDodComboBox;
+  //ArrayList<Dropout> droupoutal=new ArrayList<>();
 
 
 
@@ -352,31 +361,52 @@ class Main{
     regularPanel.add(numOfCreditHourslb);
     regularPanel.add(numOfCreditHourstf);
 
+
+    //Enrollment Id and textField
+    regularEnrollmentIdlb=new JLabel("Enrollment Id");
+    regularEnrollmentIdlb.setBounds(10,160,170,20);
+    regularEnrollmentIdlb.setFont(new Font("Arial",Font.BOLD,14));
+    regularEnrollmentIdlb.setForeground(Color.WHITE);
+    regularEnrollmentIdtf=new TextField();
+    regularEnrollmentIdtf.setBounds(190,160,120,20);
+    regularEnrollmentIdtf.setFont(new Font("Arial",Font.PLAIN,14));
+    regularPanel.add(regularEnrollmentIdlb);
+    regularPanel.add(regularEnrollmentIdtf);
+
+
     //Number of Days Present Label and Textfield
     dayPresentlb=new JLabel("Number of Days Present:");
-    dayPresentlb.setBounds(10,160,180,20);
+    dayPresentlb.setBounds(10,200,180,20);
     dayPresentlb.setFont(new Font("Arial",Font.BOLD,14));
     dayPresentlb.setForeground(Color.WHITE);
     numOfDaysPresenttf=new TextField();
-    numOfDaysPresenttf.setBounds(190,160,120,20);
+    numOfDaysPresenttf.setBounds(190,200,120,20);
     numOfDaysPresenttf.setFont(new Font("Arial",Font.PLAIN,14));
     regularPanel.add(dayPresentlb);
     regularPanel.add(numOfDaysPresenttf);
 
+    
+
+
     /////////////////////////CONFIG REGULAR BUTTON
     addRegularbt=new JButton("Add Regular");
     addRegularbt.setFont(new Font("Arial",Font.BOLD,14));
-    addRegularbt.setBounds(10,200,140,20);
+    addRegularbt.setBounds(10,250,140,20);
     regularPanel.add(addRegularbt);
     /////////////////////////Config display button
     displayRegularButtonbt=new JButton("Display Regular");
     displayRegularButtonbt.setFont(new Font("Arial",Font.BOLD,14));
-    displayRegularButtonbt.setBounds(170,200,140,20);
+    displayRegularButtonbt.setBounds(170,250,170,20);
     regularPanel.add(displayRegularButtonbt);
-
+    //////////////////////////Config grantCertficateButton
+    grantCertificatebt=new JButton("Grant Certificate");
+    grantCertificatebt.setFont(new Font("Arial",Font.BOLD,14));
+    grantCertificatebt.setBounds(10,300,140,20);
+    regularPanel.add(grantCertificatebt);
+    //config presentpercentagebutton
     presentPercentageButton=new JButton("Present Percentage");
     presentPercentageButton.setFont(new Font("Arial",Font.BOLD,14));
-    presentPercentageButton.setBounds(90,250,180,20);
+    presentPercentageButton.setBounds(170,300,170,20);
     regularPanel.add(presentPercentageButton);
 
 
@@ -410,7 +440,7 @@ class Main{
         int courseDuration=getStudentCourseDuration();
         int tuitionFee=getStudentTuitionFee();
 
-        RegularStudent reg=new RegularStudent(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfModules,numOfCreditHours,numOfDaysPresent);
+        Regular reg=new Regular(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfModules,numOfCreditHours,numOfDaysPresent);
         studental.add(reg);
         regularal.add(reg);
         JOptionPane.showMessageDialog(frame,"Regular student record successfully recorded");
@@ -424,7 +454,7 @@ class Main{
         displayRegularButtonbt.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e){
         String regularStudent="";
-        for(RegularStudent regobject:regularal){
+        for(Regular regobject:regularal){
           regularStudent+=regobject.toString()+"\n";
         }
         JOptionPane.showMessageDialog(frame,regularStudent);
@@ -437,6 +467,50 @@ class Main{
       }
     });
     
+    ///////////////////////////////////// WORKING WITH DROPOUT CLASS//////////////////////////////////////////////////////////////
+    /* 
+    private int numOfRemainingModules;
+    private int numOfMonthsAttended;
+    private String dateOfDropout;
+    private int remainingAmount
+    */
+
+    /////////////////numofremainingmodules
+    remainingModuleslb=new JLabel("Number Of Remaining Modules");
+    remainingModuleslb.setFont(new Font("Arial",Font.BOLD,14));
+    remainingModuleslb.setForeground(Color.WHITE);
+    remainingModuleslb.setBounds(10,80,150,20);
+    remainingModulestf=new TextField();
+    remainingModulestf.setFont(new Font("Arial",Font.PLAIN,14));
+    remainingModulestf.setBounds(140,360,120,20);
+    dropoutPanel.add(remainingModuleslb);
+    dropoutPanel.add(remainingModulestf);
+
+
+    //numofmonthsAttended
+    numOfMonthsAttendedlb=new JLabel("Number Of Months Attended");
+    numOfMonthsAttendedlb.setFont(new Font("Arial",Font.BOLD,14));
+    numOfMonthsAttendedlb.setForeground(Color.WHITE);
+    numOfMonthsAttendedlb.setBounds(10,360,100,20);
+    numOfMonthsAttendedtf=new TextField();
+    numOfMonthsAttendedtf.setFont(new Font("Arial",Font.PLAIN,14));
+    numOfMonthsAttendedtf.setBounds(140,360,120,20);
+    dropoutPanel.add(numOfMonthsAttendedlb);
+    dropoutPanel.add(numOfMonthsAttendedtf);
+
+
+
+    //
+
+
+
+    
+
+
+
+
+
+
     
 
     
@@ -614,7 +688,7 @@ class Main{
     return newRegularDaysPresent;
   }
 
-
+  
 
 
 
@@ -692,11 +766,11 @@ class Student{
   }
 }
 
-class RegularStudent extends Student{
+class Regular extends Student{
   int numOfModules;
   int numOfCreditHours;
   double daysPresent;
-  public RegularStudent(String studentName,String dateOfBirth,String courseName,int enrollmentId,String dateOfEnrollment,int courseDuration,int tuitionFee,int numOfModules,int numOfCreditHours,double daysPresent){
+  public Regular(String studentName,String dateOfBirth,String courseName,int enrollmentId,String dateOfEnrollment,int courseDuration,int tuitionFee,int numOfModules,int numOfCreditHours,double daysPresent){
     super(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee);
     this.numOfModules=numOfModules;
     this.numOfCreditHours=numOfCreditHours;
@@ -710,7 +784,6 @@ class RegularStudent extends Student{
     "\nDays Present:"+daysPresent;
   }
 }
-
 
 
 
