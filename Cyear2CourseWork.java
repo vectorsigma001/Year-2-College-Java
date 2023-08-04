@@ -1,4 +1,5 @@
 package newGui;
+package newGui;
 
 //frame manipulaions Classes and packages
 import javax.swing.JFrame;
@@ -55,14 +56,16 @@ class Main{
   
 
   //working with dropoutclass
-  JLabel numOfRemainingModuleslb1,numOfRemainingModuleslb2,numOfMonthsAttendedlb,dateOfDropoutlb,remainingAmountlb;
-  TextField numOfRemainingModulestf,numOfMonthsAttendedtf,remainingAmount;
+  JLabel numOfRemainingModuleslb1,numOfRemainingModuleslb2,numOfMonthsAttendedlb1,numOfMonthsAttendedlb2,dateOfDropoutlb,remainingAmountlb;
+  TextField numOfRemainingModulestf,numOfMonthsAttendedtf,remainingAmounttf;
   
   JComboBox<String> yearDodComboBox;
   JComboBox<String> monthDodComboBox;
   JComboBox<String> dayDodComboBox;
   //ArrayList<Dropout> droupoutal=new ArrayList<>();
 
+  JLabel payBillslb,removeDropoutStudentlb,dropoutDisplaylb,dropClearlb;
+  JButton payBillsbt,removeDropoutStudentbt,dropoutDisplaybt,dropoutClearbt;
 
 
 
@@ -271,6 +274,7 @@ class Main{
     dropoutPanel=new JPanel();
     dropoutPanel.setSize(350,600);
     dropoutPanel.setBackground(new Color(155,66,245));
+    dropoutPanel.setLayout(null);
     dropoutPanel.setLocation(875,25);
     frame.add(dropoutPanel);
 
@@ -478,41 +482,78 @@ class Main{
     */
 
     /////////////////numofremainingmodules
-    numOfRemainingModuleslb1=new JLabel("Number Of");
+    numOfRemainingModuleslb1=new JLabel("Number of Remaining");
     numOfRemainingModuleslb1.setFont(new Font("Arial",Font.BOLD,14));
     numOfRemainingModuleslb1.setForeground(Color.WHITE);
     numOfRemainingModuleslb1.setBounds(10,80,150,20);
-    numOfRemainingModuleslb2=new JLabel("Remaining Modules");
+    numOfRemainingModuleslb2=new JLabel("Modules:");
     numOfRemainingModuleslb2.setFont(new Font("Arial",Font.BOLD,14));
     numOfRemainingModuleslb2.setForeground(Color.WHITE);
-    numOfRemainingModuleslb2.setBounds(10,80,170,20);
+    numOfRemainingModuleslb2.setBounds(10,100,150,20);
     numOfRemainingModulestf=new TextField();
     numOfRemainingModulestf.setFont(new Font("Arial",Font.PLAIN,14));
-    numOfRemainingModulestf.setBounds(140,360,120,20);
+    numOfRemainingModulestf.setBounds(190,100,120,20);
     dropoutPanel.add(numOfRemainingModuleslb1);
     dropoutPanel.add(numOfRemainingModuleslb2);
     dropoutPanel.add(numOfRemainingModulestf);
 
     //numofmonthsAttended
-    numOfMonthsAttendedlb=new JLabel("Number Of Months Attended");
-    numOfMonthsAttendedlb.setFont(new Font("Arial",Font.BOLD,14));
-    numOfMonthsAttendedlb.setForeground(Color.WHITE);
-    numOfMonthsAttendedlb.setBounds(10,120,170,20);
+    numOfMonthsAttendedlb1=new JLabel("Number Of");
+    numOfMonthsAttendedlb1.setFont(new Font("Arial",Font.BOLD,14));
+    numOfMonthsAttendedlb1.setForeground(Color.WHITE);
+    numOfMonthsAttendedlb1.setBounds(10,140,170,20);
+    numOfMonthsAttendedlb2=new JLabel("Months Attended:");
+    numOfMonthsAttendedlb2.setFont(new Font("Arial",Font.BOLD,14));
+    numOfMonthsAttendedlb2.setForeground(Color.WHITE);
+    numOfMonthsAttendedlb2.setBounds(10,160,170,20);
     numOfMonthsAttendedtf=new TextField();
     numOfMonthsAttendedtf.setFont(new Font("Arial",Font.PLAIN,14));
-    numOfMonthsAttendedtf.setBounds(140,360,120,20);
-    dropoutPanel.add(numOfMonthsAttendedlb);
+    numOfMonthsAttendedtf.setBounds(190,160,120,20);
+    dropoutPanel.add(numOfMonthsAttendedlb1);
+    dropoutPanel.add(numOfMonthsAttendedlb2);
     dropoutPanel.add(numOfMonthsAttendedtf);
 
     //Date of dropout label and combo box
-    dateOfDropoutlb=new JLabel("Number Of Months Attended");
+    dateOfDropoutlb=new JLabel("Date Of Dropout:");
     dateOfDropoutlb.setFont(new Font("Arial",Font.BOLD,14));
     dateOfDropoutlb.setForeground(Color.WHITE);
-    dateOfDropoutlb.setBounds(10,160,170,20);
+    dateOfDropoutlb.setBounds(10,200,170,20);
     dropoutPanel.add(dateOfDropoutlb);
 
-    //
+    //combobox config 1 date of enrollment
+     yearDodComboBox=new JComboBox<>();
+     for(String year1:years){
+      yearDodComboBox.addItem(year1);
+    }
+    yearDodComboBox.setBounds(140,200, 60, 20);
+    dropoutPanel.add(yearDodComboBox);
+    monthDodComboBox=new JComboBox<>();
+    for(String month1:months){
+      monthDodComboBox.addItem(month1);
+    }
+    monthDodComboBox.setBounds(210, 200, 70, 20);
+    dropoutPanel.add(monthDodComboBox);
+    dayDodComboBox=new JComboBox<>();
+    for(String day1:days){
+      dayDodComboBox.addItem(day1);
+    }
+    dayDodComboBox.setBounds(290,200,60,20);
+    dropoutPanel.add(dayDodComboBox);
 
+
+    //Remaining Amonnt label and text field
+    remainingAmountlb=new JLabel("Remaining Amount:");
+    remainingAmountlb.setFont(new Font("Arial",Font.BOLD,14));
+    remainingAmountlb.setForeground(Color.WHITE);
+    remainingAmountlb.setBounds(10,240,134,20);
+    remainingAmounttf=new TextField();
+    remainingAmounttf.setFont(new Font("Arial",Font.PLAIN,14));
+    remainingAmounttf.setBounds(190,240,120,20);
+    dropoutPanel.add(remainingAmountlb);
+    dropoutPanel.add(remainingAmounttf);
+
+
+    
 
 
     
@@ -795,8 +836,6 @@ class Regular extends Student{
     "\nDays Present:"+daysPresent;
   }
 }
-
-
 
 
 
