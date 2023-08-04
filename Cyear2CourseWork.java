@@ -1,5 +1,3 @@
-package newGui;
-package newGui;
 
 //frame manipulaions Classes and packages
 import javax.swing.JFrame;
@@ -64,7 +62,7 @@ class Main{
   JComboBox<String> dayDodComboBox;
   //ArrayList<Dropout> droupoutal=new ArrayList<>();
 
-  JLabel payBillslb,removeDropoutStudentlb,dropoutDisplaylb,dropClearlb;
+ //buttons for dropOutStudent
   JButton payBillsbt,removeDropoutStudentbt,dropoutDisplaybt,dropoutClearbt;
 
 
@@ -552,6 +550,28 @@ class Main{
     dropoutPanel.add(remainingAmountlb);
     dropoutPanel.add(remainingAmounttf);
 
+    //configuring button of droupout class
+    /////////////////////////CONFIG Dropout BUTTON
+    payBillsbt=new JButton("pay bills");
+    payBillsbt.setFont(new Font("Arial",Font.BOLD,14));
+    payBillsbt.setBounds(10,290,140,20);
+    dropoutPanel.add(payBillsbt);
+    /////////////////////////Config display button
+    removeDropoutStudentbt=new JButton("Remove Dropout Std");
+    removeDropoutStudentbt.setFont(new Font("Arial",Font.BOLD,14));
+    removeDropoutStudentbt.setBounds(170,290,170,20);
+    dropoutPanel.add(removeDropoutStudentbt);
+    //////////////////////////Config grantCertficateButton
+    dropoutDisplaybt=new JButton("Display");
+    dropoutDisplaybt.setFont(new Font("Arial",Font.BOLD,14));
+    dropoutDisplaybt.setBounds(10,340,140,20);
+    dropoutPanel.add(dropoutDisplaybt);
+    //config presentpercentagebutton
+    dropoutClearbt=new JButton("Clear");
+    dropoutClearbt.setFont(new Font("Arial",Font.BOLD,14));
+    dropoutClearbt.setBounds(170,340,170,20);
+    dropoutPanel.add(dropoutClearbt);
+
 
     
 
@@ -836,9 +856,6 @@ class Regular extends Student{
     "\nDays Present:"+daysPresent;
   }
 }
-
-
-
 
 
 
