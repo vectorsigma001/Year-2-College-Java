@@ -450,7 +450,7 @@ class Main{
         int courseDuration=getStudentCourseDuration();
         int tuitionFee=getStudentTuitionFee();
 
-        Regular reg=new Regular(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfModules,regularEnrollmentId,numOfCreditHours,daysPresent);
+        Regular reg = new Regular(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfModules,regularEnrollmentId,numOfCreditHours,daysPresent);
         studental.add(reg);
         regularal.add(reg);
         JOptionPane.showMessageDialog(frame,"Regular student record successfully recorded");
