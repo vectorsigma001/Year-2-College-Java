@@ -1,3 +1,4 @@
+package newGui;
 
 //frame manipulaions Classes and packages
 import javax.swing.JFrame;
@@ -423,13 +424,18 @@ class Main{
           JOptionPane.showMessageDialog(frame,"Select exact Number Of Modules");
           return;
         }
-        
-        int numOfCreditHours=getRegularNumOfCreditHours();
-        if(numOfCreditHours==INVALID){
-          JOptionPane.showMessageDialog(frame,"Select exact Number Of Credit Hours");
+        int regularEnrollmentIdCheck=getRegularEnrollmentId();
+        if(regularEnrollmentIdCheck==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select exact enrollment Id");
           return;
         }
 
+        int numOfCreditHours1=getRegularNumOfCreditHours();
+        if(numOfCreditHours1==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select exact Number Of Credit Hours");
+          return;
+        }
+        
         double numOfDaysPresent=getRegularDaysPresent();
         if(numOfDaysPresent==INVALID){
           JOptionPane.showMessageDialog(frame,"Select exact num of days Present");
@@ -444,7 +450,7 @@ class Main{
         int courseDuration=getStudentCourseDuration();
         int tuitionFee=getStudentTuitionFee();
 
-        Regular reg=new Regular(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfModules,numOfCreditHours,numOfDaysPresent);
+        Regular reg=new Regular(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfModules,regularEnrollmentId,numOfCreditHours,daysPresent);
         studental.add(reg);
         regularal.add(reg);
         JOptionPane.showMessageDialog(frame,"Regular student record successfully recorded");
@@ -742,6 +748,26 @@ class Main{
     }
     return newRegularNumOfCreditHours;
   }
+  //getter method for regularEnrollmentId
+  public int getRegularEnrollmentId(){
+    int regularEnrollmentId=INVALID;
+    String regularEnrollmentID1=regularEnrollmentIdtf.getText().trim();
+    try{
+      regularEnrollmentId=Integer.parseInt(regularEnrollmentID1);
+      if(regularEnrollmentId<=0){
+        regularEnrollmentId=INVALID;
+      }
+      else{
+        return regularEnrollmentId;
+      }
+    }
+    catch(NumberFormatException e){
+      //
+    }
+    return regularEnrollmentId;
+  }
+
+
   public double getRegularDaysPresent(){
     int newRegularDaysPresent=INVALID;
     String regularDaysPresent=numOfDaysPresenttf.getText().trim();
@@ -841,10 +867,12 @@ class Student{
 class Regular extends Student{
   int numOfModules;
   int numOfCreditHours;
+  int regularEnrollmentId;
   double daysPresent;
-  public Regular(String studentName,String dateOfBirth,String courseName,int enrollmentId,String dateOfEnrollment,int courseDuration,int tuitionFee,int numOfModules,int numOfCreditHours,double daysPresent){
+  public Regular(String studentName,String dateOfBirth,String courseName,int enrollmentId,String dateOfEnrollment,int courseDuration,int tuitionFee,int numOfModules,int regularEnrollmentId,int numOfCreditHours,double daysPresent){
     super(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee);
     this.numOfModules=numOfModules;
+    this.regularEnrollmentId=regularEnrollmentId;
     this.numOfCreditHours=numOfCreditHours;
     this.daysPresent=daysPresent;
   }
@@ -852,14 +880,8 @@ class Regular extends Student{
   public String toString(){
     return super.toString()+
     "\nNumber of Modules:"+numOfModules+
+    "\nRegular Enrollment Id:"+regularEnrollmentId+
     "\nNumber of Credit Hours:"+numOfCreditHours+
     "\nDays Present:"+daysPresent;
   }
 }
-
-
-
-
-
-
-
