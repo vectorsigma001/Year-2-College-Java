@@ -45,7 +45,6 @@ class Main{
   JButton addStudentbt,clearStudentButtonbt,displayStudentButtonbt;
   TextField studentNameTf,courseNametf,enrollmentIdtf,courseDurationtf,tuitionFeetf;
   //storing data of student class in a arraylist
-  ArrayList<Regular> regularal=new ArrayList<>();
   ArrayList<Student> studental=new ArrayList<>();
   //for regular
   JLabel numOfModuleslb,numOfCreditHourslb,dayPresentlb,regularEnrollmentIdlb;
@@ -452,7 +451,6 @@ class Main{
 
         Regular reg = new Regular(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfModules,regularEnrollmentIdCheck,numOfCreditHours1,numOfDaysPresent);
         studental.add(reg);
-        regularal.add(reg);
         JOptionPane.showMessageDialog(frame,"Regular student record successfully recorded");
         
         
@@ -464,7 +462,7 @@ class Main{
         displayRegularButtonbt.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e){
         String regularStudent="";
-        for(Regular regobject:regularal){
+        for(Regular regobject:studental){
           regularStudent+=regobject.toString()+"\n";
         }
         JOptionPane.showMessageDialog(frame,regularStudent);
@@ -473,7 +471,11 @@ class Main{
     ///////////////////////////////////////////////presentPercentagebuttonactionlistener/////////////////////////////////////////////
     presentPercentageButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e){
-       
+       for(Student obj:studental){
+         if(obj instanceOf Regular){
+           Regular newRegularObj=(Regular) obj;
+           if(getStudentEnrollmentId==newRegularObj.getRegularEnrollmenId(){
+               
       }
     });
     
