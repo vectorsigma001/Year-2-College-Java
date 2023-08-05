@@ -1,4 +1,5 @@
 //frame manipulaions Classes and packages
+
 package newGui;
 
 //frame manipulaions Classes and packages
@@ -491,10 +492,19 @@ class Main{
         for(Student obj:studentList){
            if(obj instanceof Regular){
             Regular regularobj=(Regular) obj;
-            if(enrollmentIdCheck2==regularobj.getStudentEnrollmentId()){
-
+            if(enrollmentIdCheck2==obj.getStudentEnrollmentId()){
+              char grade=getPresentPercentage();
+              found=true;
+              JOptionPane.showMessageDialog(frame,"check your enrollment");
+              break;
+            }
+            else{
+              found=false;
             }
            }
+        }
+        if(found==false){
+          JOptionPane.showMessageDialog(frame,"Check your enrollment Id");
         }
 
       }
@@ -790,7 +800,7 @@ class Main{
     return regularEnrollmentId;
   }
 
-
+  //calculate regular days present
   public double getRegularDaysPresent(){
     int newRegularDaysPresent=INVALID;
     String regularDaysPresent=numOfDaysPresenttf.getText().trim();
@@ -807,6 +817,34 @@ class Main{
 
     }
     return newRegularDaysPresent;
+  }
+  //calculating grade present Percentage 
+  boolean isGrantedScholarship=false;
+  public char getPresentPercentage(){
+      double daysPresent=getRegularDaysPresent();
+      char grade=' ';
+      double presentPercentage=(daysPresent/30/getStudentCourseDuration()*100);
+      if(getStudentCourseDuration()<daysPresent/30){
+        JOptionPane.showMessageDialog(frame,"You need to study from beginning");
+      }
+      else if(presentPercentage>=80&&presentPercentage<=100){
+        isGrantedScholarship=true;
+        grade='A';
+      }
+      else if(presentPercentage>=60&&presentPercentage<=79){
+        grade='B';
+      }
+      else if(presentPercentage>=40&&presentPercentage<=59){
+        grade='C';
+      }
+      else if(presentPercentage>=20&&presentPercentage<=39){
+        grade='D';
+      }
+      else{
+        grade='E';
+      }
+
+      return grade;
   }
   
 
@@ -910,4 +948,3 @@ class Regular extends Student{
     "\nDays Present:"+daysPresent;
   }
 }
-
