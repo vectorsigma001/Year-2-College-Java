@@ -886,3 +886,8 @@ class Regular extends Student{
   }
 }
 
+
+
+
+
+//check the validation in add regular student
