@@ -1,4 +1,7 @@
 //frame manipulaions Classes and packages
+package newGui;
+
+//frame manipulaions Classes and packages
 import javax.swing.JFrame;
 import java.awt.Toolkit;
 import java.awt.Dimension;
@@ -483,14 +486,13 @@ class Main{
         if(daysPresentCheck2==INVALID){
           JOptionPane.showMessageDialog(frame,"Select valid number of days Present");
         }
-        ArrayList<Student> list=new ArrayList<Student>();
-        ArrayList<Regular> regularObj=new ArrayList<Regular>();
+        ArrayList<Student> studentList=new ArrayList<Student>();
         boolean found=false;
-        for(Student obj:list){
+        for(Student obj:studentList){
            if(obj instanceof Regular){
-            Regular regularobj=(Regular) list;
-            if(enrollmentIdCheck2==regularObj.getRegularEnrollmentId()){
-              
+            Regular regularobj=(Regular) obj;
+            if(enrollmentIdCheck2==regularobj.getStudentEnrollmentId()){
+
             }
            }
         }
@@ -908,3 +910,4 @@ class Regular extends Student{
     "\nDays Present:"+daysPresent;
   }
 }
+
