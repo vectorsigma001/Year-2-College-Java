@@ -1,4 +1,3 @@
-package newGui;
 
 //frame manipulaions Classes and packages
 import javax.swing.JFrame;
@@ -11,16 +10,17 @@ import java.awt.Color;
 
 //events
 import java.awt.event.ActionListener;
+//import java.sql.Array;
 import java.awt.event.ActionEvent;
 
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane; 
 import java.awt.TextField;
-
-
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 //optional package
@@ -54,8 +54,8 @@ class Main{
   
 
   //working with dropoutclass
-  JLabel numOfRemainingModuleslb1,numOfRemainingModuleslb2,numOfMonthsAttendedlb1,numOfMonthsAttendedlb2,dateOfDropoutlb,remainingAmountlb;
-  TextField numOfRemainingModulestf,numOfMonthsAttendedtf,remainingAmounttf;
+  JLabel numOfRemainingModuleslb1,numOfRemainingModuleslb2,numOfMonthsAttendedlb1,numOfMonthsAttendedlb2,dateOfDropoutlb,dropoutEnrollmentIdlb;
+  TextField numOfRemainingModulestf,numOfMonthsAttendedtf,dropoutenrollmentIdtf,dropoutEnrollmentIdtf;
   
   JComboBox<String> yearDodComboBox;
   JComboBox<String> monthDodComboBox;
@@ -63,7 +63,7 @@ class Main{
   //ArrayList<Dropout> droupoutal=new ArrayList<>();
 
  //buttons for dropOutStudent
-  JButton payBillsbt,removeDropoutStudentbt,dropoutDisplaybt,dropoutClearbt;
+  JButton payBillsbt,removeDropoutStudentbt,dropoutDisplaybt,dropoutClearbt,addDropoutbt;
 
 
 
@@ -442,14 +442,43 @@ class Main{
         }
         //////////////////geting values from studentPanel need to make changes here//////////////////////
         String studentName=getStudentName();
+        if(studentName.equals("")){
+          JOptionPane.showMessageDialog(frame,"Select your Student Name");
+          return;
+        }
         String dateOfBirth=getStudentDateOfBirth();
+        if(dateOfBirth.equals("")){
+          JOptionPane.showMessageDialog(frame,"Select your date of birth");
+          return;
+        }
         String courseName=getStudentCourseName();
+        if(courseName.equals("")){
+          JOptionPane.showMessageDialog(frame,"Select your Course Name");
+          return;
+        }
         int enrollmentId=getStudentEnrollmentId();
+        if(enrollmentId==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select your enrollment Id");
+          return;
+        }
         String dateOfEnrollment=getStudentDateOfEnrollment();
+        if(dateOfEnrollment==null){
+          JOptionPane.showMessageDialog(frame,"Select your enrollment date of enrollment");
+          return;
+        }
         int courseDuration=getStudentCourseDuration();
+        if(courseDuration==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select your course duration");
+          return;
+        }
         int tuitionFee=getStudentTuitionFee();
+        if(tuitionFee==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select a valid tuition fee");
+          return;
+        }
 
-        Regular reg = new Regular(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfModules,regularEnrollmentIdCheck,numOfCreditHours1,numOfDaysPresent);
+
+        Student reg = new Regular(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfModules,regularEnrollmentIdCheck,numOfCreditHours1,numOfDaysPresent);
         studental.add(reg);
         JOptionPane.showMessageDialog(frame,"Regular student record successfully recorded");
         
@@ -458,27 +487,99 @@ class Main{
       
       }  
     });
-      ////////////////////////display button on regular panel
+      ////////////////////////display button on regular panel Action LISTENER///////////////////////
         displayRegularButtonbt.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e){
         String regularStudent="";
-        for(Regular regobject:studental){
-          regularStudent+=regobject.toString()+"\n";
+        for(Student stdObject:studental){
+          if(stdObject instanceof Regular){
+            Regular regObject=(Regular) stdObject;
+            regularStudent+=regObject.toString()+"\n";
         }
         JOptionPane.showMessageDialog(frame,regularStudent);
       }
+    }
     });
+    
+    
     ///////////////////////////////////////////////presentPercentagebuttonactionlistener/////////////////////////////////////////////
     presentPercentageButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e){
-       for(Student obj:studental){
-         if(obj instanceOf Regular){
-           Regular newRegularObj=(Regular) obj;
-           if(getStudentEnrollmentId==newRegularObj.getRegularEnrollmenId(){
-               
+        int enrollmentIdCheck2=getRegularEnrollmentId();
+        if(enrollmentIdCheck2==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select exact Number Of Enrollment Id");
+          return;
+        }
+        double daysPresentCheck2=getRegularDaysPresent();
+        if(daysPresentCheck2==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select valid number of days Present");
+        }
+  
+        boolean found=false;
+        for(Student obj:studental){
+           if(obj instanceof Regular){
+            Regular regularobj=(Regular) obj;
+            if(enrollmentIdCheck2==regularobj.getStudentEnrollmentId()){
+              char grade=regularobj.getPresentPercentage();
+              found=true;
+              JOptionPane.showMessageDialog(frame,grade);
+              break;
+            }
+            else{
+              found=false;
+            }
+           }
+          
+        }
+        if(found==false){
+          JOptionPane.showMessageDialog(frame,"Your.......");
+        }
+
       }
     });
     
+     
+    ////////////////////////////////////////////////////////////////////Grant Certificate Button actionListener/////////////////////////////////
+    grantCertificatebt.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent e){
+        int enrollmentIdCheck2=getRegularEnrollmentId();
+        if(enrollmentIdCheck2==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select exact Number Of Enrollment Id");
+          return;
+        }
+        String courseNameCheck2=getStudentCourseName();
+        if(courseNameCheck2.equals("")){
+          JOptionPane.showMessageDialog(frame,"Select your CourseName");
+          return;
+        }
+      String dateOfEnrollmentCheck=getStudentDateOfEnrollment();
+      if(dateOfEnrollmentCheck==null){
+        JOptionPane.showMessageDialog(frame,"Select your date of enrollment");
+        return;
+      }
+      boolean found=false;
+        for(Student obj:studental){
+           if(obj instanceof Regular){
+            Regular regularobj=(Regular) obj;
+            if(enrollmentIdCheck2==regularobj.getStudentEnrollmentId()){
+              String grantCertificateCheck=regularobj.grantCertificate();
+              found=true;
+              JOptionPane.showMessageDialog(frame,grantCertificateCheck);
+              break;
+            }
+            else{
+              found=false;
+            }
+           }
+          
+        }
+        if(found==false){
+          JOptionPane.showMessageDialog(frame,"Your..........");
+        }  
+      }
+    });
+
+
     ///////////////////////////////////// WORKING WITH DROPOUT CLASS//////////////////////////////////////////////////////////////
     /* 
     private int numOfRemainingModules;
@@ -546,57 +647,135 @@ class Main{
     dayDodComboBox.setBounds(290,200,60,20);
     dropoutPanel.add(dayDodComboBox);
 
-
-    //Remaining Amonnt label and text field
-    remainingAmountlb=new JLabel("Remaining Amount:");
-    remainingAmountlb.setFont(new Font("Arial",Font.BOLD,14));
-    remainingAmountlb.setForeground(Color.WHITE);
-    remainingAmountlb.setBounds(10,240,134,20);
-    remainingAmounttf=new TextField();
-    remainingAmounttf.setFont(new Font("Arial",Font.PLAIN,14));
-    remainingAmounttf.setBounds(190,240,120,20);
-    dropoutPanel.add(remainingAmountlb);
-    dropoutPanel.add(remainingAmounttf);
+    
+    dropoutEnrollmentIdlb=new JLabel("Enrollment Id:");
+    dropoutEnrollmentIdlb.setBounds(10,240,170,20);
+    dropoutEnrollmentIdlb.setFont(new Font("Arial",Font.BOLD,14));
+    dropoutEnrollmentIdlb.setForeground(Color.WHITE);
+    dropoutEnrollmentIdtf=new TextField();
+    dropoutEnrollmentIdtf.setBounds(190,240,120,20);
+    dropoutEnrollmentIdtf.setFont(new Font("Arial",Font.PLAIN,14));
+    dropoutPanel.add(dropoutEnrollmentIdlb);
+    dropoutPanel.add(dropoutEnrollmentIdtf);
+    
 
     //configuring button of droupout class
+
+    ////////////////////////CONFIG ADDDROPOUT BUTTON
+    addDropoutbt=new JButton("Add Dropout");
+    addDropoutbt.setFont(new Font("Arial",Font.BOLD,14));
+    addDropoutbt.setBounds(10,320,140,20);
+    dropoutPanel.add(addDropoutbt);
     /////////////////////////CONFIG Dropout BUTTON
     payBillsbt=new JButton("pay bills");
     payBillsbt.setFont(new Font("Arial",Font.BOLD,14));
-    payBillsbt.setBounds(10,290,140,20);
+    payBillsbt.setBounds(10,360,140,20);
     dropoutPanel.add(payBillsbt);
     /////////////////////////Config display button
     removeDropoutStudentbt=new JButton("Remove Dropout Std");
     removeDropoutStudentbt.setFont(new Font("Arial",Font.BOLD,14));
-    removeDropoutStudentbt.setBounds(170,290,170,20);
+    removeDropoutStudentbt.setBounds(170,320,170,20);
     dropoutPanel.add(removeDropoutStudentbt);
     //////////////////////////Config grantCertficateButton
     dropoutDisplaybt=new JButton("Display");
     dropoutDisplaybt.setFont(new Font("Arial",Font.BOLD,14));
-    dropoutDisplaybt.setBounds(10,340,140,20);
+    dropoutDisplaybt.setBounds(120,400,140,20);
     dropoutPanel.add(dropoutDisplaybt);
     //config presentpercentagebutton
     dropoutClearbt=new JButton("Clear");
     dropoutClearbt.setFont(new Font("Arial",Font.BOLD,14));
-    dropoutClearbt.setBounds(170,340,170,20);
+    dropoutClearbt.setBounds(170,360,170,20);
     dropoutPanel.add(dropoutClearbt);
 
+    //////////////////////////////////Dropout class action listener////////////////////////////////////////////////////////
+     
+    addDropoutbt.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e){
 
+        int numOfRemainingModules=getNumberOfRemainingModules();
+        if(numOfRemainingModules==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select valid number of remaining modules");
+          return;
+        }
+        int numofMonthsAttended=getNumberOfMonthsAttended();
+        if(numofMonthsAttended==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select valid number of months attended");
+          return;
+        }
+        
+        int dropoutEnrollmentId=getDropoutEnrollmentId();
+        if(dropoutEnrollmentId==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select valid Enrollment Id");
+          return;
+        }
+        
+        String dateOfDropout=getDateOfDropout();
+        if(dateOfDropout==null){
+          JOptionPane.showMessageDialog(frame,"Select date of Dropout");
+          return;
+        }
+
+        
+        String studentName=getStudentName();
+        if(studentName.equals("")){
+          JOptionPane.showMessageDialog(frame,"Select your Student Name");
+          return;
+        }
+        
+        String dateOfBirth=getStudentDateOfBirth();
+        if(dateOfBirth.equals("")){
+          JOptionPane.showMessageDialog(frame,"Select your date of birth");
+          return;
+        }
+      
+        String courseName=getStudentCourseName();
+        if(courseName.equals("")){
+          JOptionPane.showMessageDialog(frame,"Select your Course Name");
+          return;
+        }
+        
+        int enrollmentId=getStudentEnrollmentId();
+        if(enrollmentId==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select your enrollment Id");
+          return;
+        }
+        
+        String dateOfEnrollment=getStudentDateOfEnrollment();
+        if(dateOfEnrollment==null){
+          JOptionPane.showMessageDialog(frame,"Select your enrollment date of enrollment");
+          return;
+        }
+        
+        int courseDuration=getStudentCourseDuration();
+        if(courseDuration==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select your course duration");
+          return;
+        }
+        
+        int tuitionFee=getStudentTuitionFee();
+        if(tuitionFee==INVALID){
+          JOptionPane.showMessageDialog(frame,"Select a valid tuition fee");
+          return;
+        }
+        
+        Student dropoutobj = new Dropout(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfRemainingModules,numofMonthsAttended,dropoutEnrollmentId,dateOfDropout);
+        studental.add(dropoutobj);
+        JOptionPane.showMessageDialog(frame,"Dropout student record successfully recorded");
+      }
+    });
+    
+    payBillsbt.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e){
+
+
+        
+
+      }
+    });
+    
     
 
-
-    
-
-
-
-
-
-
-    
-
-    
-
-
-
+    //////////////////////////////////PAY BILL OF DROPOUT STUDENT KO ACTION LISTENER////////////////////////////////////////
 
   } 
   //|$$$$$$$$$$$$$$$$$$$$$$$||Getter method for all the components||$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$/
@@ -770,6 +949,7 @@ class Main{
   }
 
 
+  //calculate regular days present
   public double getRegularDaysPresent(){
     int newRegularDaysPresent=INVALID;
     String regularDaysPresent=numOfDaysPresenttf.getText().trim();
@@ -788,21 +968,87 @@ class Main{
     return newRegularDaysPresent;
   }
 
+  ////////////////////////working with dropoutPanel getter method/////////////////////////////////////////////////////////////////
+    public int getNumberOfRemainingModules(){
+    int newRemainingModules=INVALID;
+    String remainingModules=numOfRemainingModulestf.getText().trim();
+    try{
+      newRemainingModules=Integer.parseInt(remainingModules);
+      if(newRemainingModules<=0){
+        newRemainingModules=INVALID;
+      }
+      else{
+        return newRemainingModules;
+      }
+    }     
+    catch(NumberFormatException e){
+
+    }
+    return newRemainingModules;
+  }
+  public int getNumberOfMonthsAttended(){
+    int newNumOfMonthsAttended=INVALID;
+    String remainingModules=numOfMonthsAttendedtf.getText().trim();
+    try{
+      newNumOfMonthsAttended=Integer.parseInt(remainingModules);
+      if(newNumOfMonthsAttended<=0){
+        newNumOfMonthsAttended=INVALID;
+      }
+      else{
+        return newNumOfMonthsAttended;
+      }
+    }     
+    catch(NumberFormatException e){
+
+    }
+    return newNumOfMonthsAttended;
+  }
+  //getter method for dateOfDropout
+  public String getDateOfDropout(){
+      String year=yearDodComboBox.getSelectedItem().toString();
+      String month=monthDodComboBox.getSelectedItem().toString();
+      String day=dayDodComboBox.getSelectedItem().toString();
+      String dateOfDropout=null;
+      //turn it into 
+      //if(year.equals("Year")||month.equals("Month")||day.equals("Day")
+      if(year.equals("Year")||month.equals("Month")||day.equals("Day")){
+          dateOfDropout=null;
+      }
+      else{
+       dateOfDropout=
+          year+"\n"+
+          month+"\n"+
+          day+"\n"
+      ;
+      }
+      return dateOfDropout;
+  }
+ 
+
+
+  //getter method for dropoutEnrollmentId
+  public int getDropoutEnrollmentId(){
+    int newDropoutEnrollmentId=INVALID;
+    String dropoutEnrollmentId=dropoutEnrollmentIdtf.getText().trim();
+    try{
+      newDropoutEnrollmentId=Integer.parseInt(dropoutEnrollmentId);
+      if(newDropoutEnrollmentId<=0){
+        newDropoutEnrollmentId=INVALID;
+      }
+      else{
+        return newDropoutEnrollmentId;
+      }
+    }
+    catch(NumberFormatException e){
+
+    }
+    return newDropoutEnrollmentId;
+  }
+  
   
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+  
 
 
 
@@ -820,7 +1066,7 @@ class Main{
 
    public static void main(String args[]){
     Main object=new Main();
-  }
+   }
 }
 
 
@@ -828,13 +1074,13 @@ class Main{
 
 //creating Student class
 class Student{
-  String studentName;
-  String dateOfBirth;
-  String courseName;
-  int enrollmentId;
-  String dateOfEnrollment;
-  int courseDuration;
-  int tuitionFee;
+  private String studentName;
+  private String dateOfBirth;
+  private String courseName;
+  private int enrollmentId;
+  private String dateOfEnrollment;
+  private int courseDuration;
+  private int tuitionFee;
   public Student(String studentName,String dateOfBirth,String courseName,int enrollmentId,String dateOfEnrollment,int courseDuration,int tuitionFee){
     this.studentName=studentName;
     this.dateOfBirth=dateOfBirth;
@@ -844,6 +1090,39 @@ class Student{
     this.courseDuration=courseDuration;
     this.tuitionFee=tuitionFee;
   }
+  public int getCourseDuration(){
+    return courseDuration;
+  }
+  public int getTuitionFee(){
+    return tuitionFee;
+  }
+  //setter method 
+  public void setStudentName(String sd){
+    this.studentName=sd;
+  }
+  public void setDateOfBirth(String db){
+    this.dateOfBirth=db;
+  }
+  public void setCourseName(String cn){
+    this.courseName=cn;
+  }
+  public void setEnrollmentID(int ei){
+    this.enrollmentId=ei;
+  }
+  public void setDateOfEnrollment(String de){
+    this.dateOfEnrollment=de;
+  }
+  public void setCourseDuration(int courseDuration){
+    this.courseDuration=courseDuration;
+  }
+  public void setTuitionFee(int tuitionFee){
+    this.tuitionFee=tuitionFee;
+  }
+  public int getStudentEnrollmentId(){
+    return enrollmentId;
+  }
+
+
   public void display(){
     System.out.println("Student Name is "+studentName);
     System.out.println("Date of Birth is "+dateOfBirth);
@@ -851,7 +1130,7 @@ class Student{
     System.out.println("Enrollment Id is "+enrollmentId);
     System.out.println("Date Of Enrollment is"+dateOfEnrollment);
     System.out.println("Course Duration is"+courseDuration);
-    System.out.println("Tuitio Fee is"+tuitionFee);
+    System.out.println("Tuition Fee is"+tuitionFee);
 
   }
   @Override
@@ -867,10 +1146,12 @@ class Student{
 }
 
 class Regular extends Student{
-  int numOfModules;
-  int numOfCreditHours;
-  int regularEnrollmentId;
-  double daysPresent;
+  private int numOfModules;
+  private int numOfCreditHours;
+  private int regularEnrollmentId;
+  private double daysPresent;
+  private boolean isGrantedScholarship=false;
+  
   public Regular(String studentName,String dateOfBirth,String courseName,int enrollmentId,String dateOfEnrollment,int courseDuration,int tuitionFee,int numOfModules,int regularEnrollmentId,int numOfCreditHours,double daysPresent){
     super(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee);
     this.numOfModules=numOfModules;
@@ -886,10 +1167,94 @@ class Regular extends Student{
     "\nNumber of Credit Hours:"+numOfCreditHours+
     "\nDays Present:"+daysPresent;
   }
+  
+    public char getPresentPercentage(){
+      char grade=' ';
+      double presentPercentage=(this.daysPresent/30/getCourseDuration()*100);
+      if(presentPercentage>=80&&presentPercentage<=100){
+        isGrantedScholarship=true;
+        grade='A';
+      }
+      else if(presentPercentage>=60&&presentPercentage<=79){
+        grade='B';
+      }
+      else if(presentPercentage>=40&&presentPercentage<=59){
+        grade='C';
+      }
+      else if(presentPercentage>=20&&presentPercentage<=39){
+        grade='D';
+      }
+      else{
+        grade='E';
+      }
+
+      return grade;
+  } 
+  public String grantCertificate(){
+    double presentPercentage=(this.daysPresent/30/getCourseDuration()*100);
+    if(presentPercentage>=80&&presentPercentage<=100&&isGrantedScholarship==true){
+      return "The Scholarship has been granted";
+    }
+   return "";
+  }
+}
+class Dropout extends Student{
+  private int numOfRemainingModules;
+  private int numOfMonthsAttended;
+  private String dateOfDropout;
+  private int remainingAmount;
+  private int dropoutEnrollmentId;
+  private boolean hasPaid=false;
+  public Dropout(String studentName,String dateOfBirth,String courseName,int enrollmentId,String dateOfEnrollment,int courseDuration,int tuitionFee,int numOfRemainingModules,int numofMonthsAttended,int dropoutEnrollmentId,String dateOfDropout){
+    super(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee);
+    this.numOfRemainingModules=numOfRemainingModules;
+    this.numOfMonthsAttended=numOfMonthsAttended;
+    this.dateOfDropout=dateOfDropout;
+    this.dropoutEnrollmentId=dropoutEnrollmentId;
+  }
+   @Override
+  public String toString(){
+    return super.toString()+
+    "\nNumber of Remaining Modules:"+numOfRemainingModules+
+    "\nNumber of Months Attended:"+numOfMonthsAttended+
+    "\nDate of dropout:"+dateOfDropout+
+    "\nDate Of Dropout:"+dateOfDropout;
+  }
+  public String billsPayable(){
+    if(hasPaid=false){
+      if(getCourseDuration()>=numOfMonthsAttended){
+        this.remainingAmount=(getCourseDuration()-numOfMonthsAttended)*getTuitionFee();
+        this.hasPaid=true;
+        return "The bills are payed, no pending amount";
+      }
+      else{
+        return "Remaining amount cannot be calcualted";
+      }
+    } 
+    else{
+      return "All bills are cleared out.....";
+    }
+    
+  }
+  public String removeDropoutStudent(){
+    if(hasPaid==true){
+      setCourseDuration(0);
+      setCourseName("");
+      setDateOfBirth("");
+      setDateOfEnrollment("");
+      setEnrollmentID(0);
+      setStudentName("");
+      setTuitionFee(0);
+      this.hasPaid=false;
+      return "All bills are cleared";
+    }
+    else{
+      return "All bills not cleared";
+    }
+  }
 }
 
 
 
 
 
-//check the validation in add regular student
