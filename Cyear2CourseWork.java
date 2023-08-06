@@ -1,3 +1,4 @@
+package newGui;
 
 //frame manipulaions Classes and packages
 import javax.swing.JFrame;
@@ -55,7 +56,7 @@ class Main{
 
   //working with dropoutclass
   JLabel numOfRemainingModuleslb1,numOfRemainingModuleslb2,numOfMonthsAttendedlb1,numOfMonthsAttendedlb2,dateOfDropoutlb,dropoutEnrollmentIdlb;
-  TextField numOfRemainingModulestf,numOfMonthsAttendedtf,dropoutenrollmentIdtf,dropoutEnrollmentIdtf;
+  TextField numOfRemainingModulestf,numOfMonthsAttendedtf,dropoutEnrollmentIdtf;
   
   JComboBox<String> yearDodComboBox;
   JComboBox<String> monthDodComboBox;
@@ -339,6 +340,21 @@ class Main{
         JOptionPane.showMessageDialog(frame,students);
       }
     });
+    clearStudentButtonbt.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e){
+        studentNameTf.setText("");
+        courseNametf.setText("");
+        enrollmentIdtf.setText("");
+        courseDurationtf.setText("");
+        tuitionFeetf.setText("");
+        yearDobComboBox.setSelectedItem("Year");
+        monthDobComboBox.setSelectedItem("Month");
+        dayDobComboBox.setSelectedItem("Day");
+        yearDoeComboBox.setSelectedItem("Year");
+        monthDoeComboBox.setSelectedItem("Month");
+        dayDoeComboBox.setSelectedItem("Day");
+      }
+    });
   /////////////////////////////working with regularPanel///////////////////////////////////////////////////////
      
 // Components for the regularPanel
@@ -532,7 +548,7 @@ class Main{
           
         }
         if(found==false){
-          JOptionPane.showMessageDialog(frame,"Your.......");
+          JOptionPane.showMessageDialog(frame,"Invalid Enrollment Id");
         }
 
       }
@@ -574,7 +590,7 @@ class Main{
           
         }
         if(found==false){
-          JOptionPane.showMessageDialog(frame,"Your..........");
+          JOptionPane.showMessageDialog(frame,"Invalid Enrollment id");
         }  
       }
     });
@@ -681,11 +697,12 @@ class Main{
     dropoutDisplaybt.setFont(new Font("Arial",Font.BOLD,14));
     dropoutDisplaybt.setBounds(120,400,140,20);
     dropoutPanel.add(dropoutDisplaybt);
-    //config presentpercentagebutton
+    //config clear buttonbutton
     dropoutClearbt=new JButton("Clear");
     dropoutClearbt.setFont(new Font("Arial",Font.BOLD,14));
     dropoutClearbt.setBounds(170,360,170,20);
     dropoutPanel.add(dropoutClearbt);
+    
 
     //////////////////////////////////Dropout class action listener////////////////////////////////////////////////////////
      
@@ -761,17 +778,76 @@ class Main{
         Student dropoutobj = new Dropout(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfRemainingModules,numofMonthsAttended,dropoutEnrollmentId,dateOfDropout);
         studental.add(dropoutobj);
         JOptionPane.showMessageDialog(frame,"Dropout student record successfully recorded");
+        dropoutDisplaybt.setVisible(true);
       }
     });
     
     payBillsbt.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e){
-
-
+        public void actionPerformed(ActionEvent e){
+        int enrollmentIdCheck3=getDropoutEnrollmentId();
+        boolean found=false;
+        for(Student obj:studental){
+          if(obj instanceof Dropout){
+            Dropout drObj=(Dropout) obj;
+            if(enrollmentIdCheck3==drObj.getStudentEnrollmentId()){
+              found=true;
+              String billPaid=drObj.billsPayable();
+              JOptionPane.showMessageDialog(frame,billPaid);
+              break;
+            }
+            else{
+              found=false;
+            }
+          }
+     
+        }
+        if(found==false){
+          JOptionPane.showMessageDialog(frame,"Invalid enrollment id");
+        }
         
 
       }
     });
+    ///////////////action listener for remove dropout student
+    removeDropoutStudentbt.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e){
+        int enrollmentIdCheck3=getDropoutEnrollmentId();
+        boolean found=false;
+        for(Student objch:studental){
+          if(objch instanceof Dropout){
+            Dropout dropobj1=(Dropout) objch;
+            if(enrollmentIdCheck3==dropobj1.getStudentEnrollmentId()){
+              String removedOkay=dropobj1.removeDropoutStudent();
+              found=true;
+              JOptionPane.showMessageDialog(frame,removedOkay);
+              break;
+            }
+            else{
+              found=false;
+            }
+          }
+        }
+        if(found=false){
+          JOptionPane.showMessageDialog(frame,"Invalid Enrollment Id");
+        }
+      }
+    });
+   ///////////////action listener for clear dropout student
+    dropoutClearbt.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent e){
+        numOfRemainingModulestf.setText("");
+        numOfMonthsAttendedtf.setText("");
+        dropoutEnrollmentIdtf.setText("");
+         yearDodComboBox.setSelectedItem("Year");
+         monthDodComboBox.setSelectedItem("Month");
+         dayDodComboBox.setSelectedItem("Day");
+         regularEnrollmentIdtf.setText("");
+      }
+    });
+    
+
+
+
     
     
 
@@ -1195,7 +1271,9 @@ class Regular extends Student{
     if(presentPercentage>=80&&presentPercentage<=100&&isGrantedScholarship==true){
       return "The Scholarship has been granted";
     }
-   return "";
+    else{
+   return "The Scholarship has not been granted";
+    }
   }
 }
 class Dropout extends Student{
@@ -1245,6 +1323,10 @@ class Dropout extends Student{
       setEnrollmentID(0);
       setStudentName("");
       setTuitionFee(0);
+      this.numOfRemainingModules=0;
+      this.numOfMonthsAttended=0;
+      this.dateOfDropout="";
+      this.remainingAmount=0;
       this.hasPaid=false;
       return "All bills are cleared";
     }
@@ -1253,7 +1335,6 @@ class Dropout extends Student{
     }
   }
 }
-
 
 
 
