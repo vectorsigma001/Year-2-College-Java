@@ -416,7 +416,8 @@ class Main{
     /////////////////////////Config display button
     displayRegularButtonbt=new JButton("Display Regular");
     displayRegularButtonbt.setFont(new Font("Arial",Font.BOLD,14));
-    displayRegularButtonbt.setBounds(170,250,170,20);
+    displayRegularButtonbt.setBounds(110,340,170,20);
+    displayRegularButtonbt.setVisible(false);
     regularPanel.add(displayRegularButtonbt);
     //////////////////////////Config grantCertficateButton
     grantCertificatebt=new JButton("Grant Certificate");
@@ -428,6 +429,11 @@ class Main{
     presentPercentageButton.setFont(new Font("Arial",Font.BOLD,14));
     presentPercentageButton.setBounds(170,300,170,20);
     regularPanel.add(presentPercentageButton);
+    //config regular Clear button
+    regularClearbt=new JButton("Clear");
+    regularClearbt.setFont(new Font("Arial",Font.BOLD,14));
+    regularClearbt.setBounds(170,250,170,20);
+    regularPanel.add(regularClearbt);
 
 
     ///////////////////////////////ACTION LISTENER FOR REGULAR CLASS////////////////////////////////////////////////////
@@ -497,7 +503,7 @@ class Main{
         Student reg = new Regular(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfModules,regularEnrollmentIdCheck,numOfCreditHours1,numOfDaysPresent);
         studental.add(reg);
         JOptionPane.showMessageDialog(frame,"Regular student record successfully recorded");
-        
+        displayRegularButtonbt.setVisible(true);
         
       
       
@@ -592,6 +598,18 @@ class Main{
         if(found==false){
           JOptionPane.showMessageDialog(frame,"Invalid Enrollment id");
         }  
+      }
+    });
+    //////////////////////////////////////CLEAR BUTTON ACTION LISTENER//////////////////////////////////////////////////////////////////\
+    regularClearbt.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e){
+        numOfModulestf.setText("");
+        numOfCreditHourstf.setText("");
+        numOfDaysPresenttf.setText("");
+        regularEnrollmentIdtf.setText("");
+        yearDoeComboBox.setSelectedItem("Year");
+        monthDoeComboBox.setSelectedItem("Month");
+        dayDoeComboBox.setSelectedItem("");
       }
     });
 
@@ -696,6 +714,7 @@ class Main{
     dropoutDisplaybt=new JButton("Display");
     dropoutDisplaybt.setFont(new Font("Arial",Font.BOLD,14));
     dropoutDisplaybt.setBounds(120,400,140,20);
+    dropoutDisplaybt.setVisible(false);
     dropoutPanel.add(dropoutDisplaybt);
     //config clear buttonbutton
     dropoutClearbt=new JButton("Clear");
@@ -842,6 +861,19 @@ class Main{
          monthDodComboBox.setSelectedItem("Month");
          dayDodComboBox.setSelectedItem("Day");
          regularEnrollmentIdtf.setText("");
+      }
+    });
+    //config dropout display button
+    dropoutDisplaybt.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e){
+        String dropoutStudent="";
+        for(Student stdObject:studental){
+          if(stdObject instanceof Dropout){
+            Dropout dropObject=(Dropout) stdObject;
+            dropoutStudent+=dropObject.toString()+"\n";
+        }
+        JOptionPane.showMessageDialog(frame,dropoutStudent);
+      }
       }
     });
     
@@ -1026,7 +1058,7 @@ class Main{
 
 
   //calculate regular days present
-  public double getRegularDaysPresent(){
+  public int getRegularDaysPresent(){
     int newRegularDaysPresent=INVALID;
     String regularDaysPresent=numOfDaysPresenttf.getText().trim();
     try{
@@ -1296,7 +1328,7 @@ class Dropout extends Student{
     "\nNumber of Remaining Modules:"+numOfRemainingModules+
     "\nNumber of Months Attended:"+numOfMonthsAttended+
     "\nDate of dropout:"+dateOfDropout+
-    "\nDate Of Dropout:"+dateOfDropout;
+    "\nDropout Enrollment Id:"+dropoutEnrollmentId;
   }
   public String billsPayable(){
     if(hasPaid=false){
@@ -1335,7 +1367,4 @@ class Dropout extends Student{
     }
   }
 }
-
-
-
 
