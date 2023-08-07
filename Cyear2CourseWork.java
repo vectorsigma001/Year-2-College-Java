@@ -1,5 +1,3 @@
-package newGui;
-
 //frame manipulaions Classes and packages
 import javax.swing.JFrame;
 import java.awt.Toolkit;
@@ -330,16 +328,17 @@ class Main{
         displayStudentButtonbt.setVisible(true);
       }  
     });
-    
+
     displayStudentButtonbt.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e){
-        String students="";
-        for(Student object:studental){
-          students+=object.toString()+"\n";
-        }
-        JOptionPane.showMessageDialog(frame,students);
+          String students = "";
+          for(Student object: studental){
+              students += object.display() + "\n";
+          }
+          JOptionPane.showMessageDialog(frame, students);
       }
-    });
+  });
+  
     clearStudentButtonbt.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e){
         studentNameTf.setText("");
@@ -510,20 +509,19 @@ class Main{
       }  
     });
       ////////////////////////display button on regular panel Action LISTENER///////////////////////
-        displayRegularButtonbt.addActionListener(new ActionListener() {
+      displayRegularButtonbt.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e){
-        String regularStudent="";
-        for(Student stdObject:studental){
-          if(stdObject instanceof Regular){
-            Regular regObject=(Regular) stdObject;
-            regularStudent+=regObject.toString()+"\n";
+            String regularStudent = "";
+            for(Student regObject : studental){
+                if(regObject instanceof Regular) {
+                    regularStudent += ((Regular) regObject).regularDisplay();
+                }
+            }
+            JOptionPane.showMessageDialog(frame, regularStudent);
         }
-        JOptionPane.showMessageDialog(frame,regularStudent);
-      }
-    }
     });
-    
-    
+
+     
     ///////////////////////////////////////////////presentPercentagebuttonactionlistener/////////////////////////////////////////////
     presentPercentageButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e){
@@ -871,18 +869,11 @@ class Main{
           if(stdObject instanceof Dropout){
             Dropout dropObject=(Dropout) stdObject;
             dropoutStudent+=dropObject.toString()+"\n";
+          }
         }
         JOptionPane.showMessageDialog(frame,dropoutStudent);
       }
-      }
     });
-    
-
-
-
-    
-    
-
     //////////////////////////////////PAY BILL OF DROPOUT STUDENT KO ACTION LISTENER////////////////////////////////////////
 
   } 
@@ -1231,25 +1222,15 @@ class Student{
   }
 
 
-  public void display(){
-    System.out.println("Student Name is "+studentName);
-    System.out.println("Date of Birth is "+dateOfBirth);
-    System.out.println("Course Name is "+courseName);
-    System.out.println("Enrollment Id is "+enrollmentId);
-    System.out.println("Date Of Enrollment is"+dateOfEnrollment);
-    System.out.println("Course Duration is"+courseDuration);
-    System.out.println("Tuition Fee is"+tuitionFee);
-
-  }
-  @Override
-  public String toString(){
-    return "Student Name is "+studentName+"\n"+
-           "Date of Birth is "+dateOfBirth+"\n"+
-           "Course Name is "+courseName+"\n"+
-          "Enrollment Id is "+enrollmentId+"\n"+
-          "Date Of Enrollment is"+dateOfEnrollment+"\n"+
-          "Course Duration is"+courseDuration+"\n"+
-          "Tuition Fee is"+tuitionFee;
+  public String display(){
+    return
+    "Student Name is "+studentName+"\n"+
+    "Date of Birth is "+dateOfBirth+"\n"+
+    "Course Name is "+courseName+"\n"+
+    "Enrollment Id is "+enrollmentId+"\n"+
+    "Date Of Enrollment is "+dateOfEnrollment+"\n"+
+    "Course Duration is "+courseDuration+"\n"+
+    "Tuition Fee is "+tuitionFee+"\n";
   }
 }
 
@@ -1270,12 +1251,19 @@ class Regular extends Student{
   @Override
   public String toString(){
     return super.toString()+
-    "\nNumber of Modules:"+numOfModules+
-    "\nRegular Enrollment Id:"+regularEnrollmentId+
-    "\nNumber of Credit Hours:"+numOfCreditHours+
+    "\nNumber of Modules:"+numOfModules+"\n"+
+    "\nRegular Enrollment Id:"+regularEnrollmentId+"\n"+
+    "\nNumber of Credit Hours:"+numOfCreditHours+"\n"+
     "\nDays Present:"+daysPresent;
   }
-  
+  public String regularDisplay(){
+    return
+      super.display()+"\n"+
+      "Number of Modules is "+numOfModules+"\n"+
+      "\nRegular Enrollment Id is :"+regularEnrollmentId+
+      "\nNumber of Credit Hours is "+numOfCreditHours+
+      "\nDays Present is "+daysPresent;
+  }
     public char getPresentPercentage(){
       char grade=' ';
       double presentPercentage=(this.daysPresent/30/getCourseDuration()*100);
@@ -1315,21 +1303,32 @@ class Dropout extends Student{
   private int remainingAmount;
   private int dropoutEnrollmentId;
   private boolean hasPaid=false;
-  public Dropout(String studentName,String dateOfBirth,String courseName,int enrollmentId,String dateOfEnrollment,int courseDuration,int tuitionFee,int numOfRemainingModules,int numofMonthsAttended,int dropoutEnrollmentId,String dateOfDropout){
+  public Dropout(String studentName,String dateOfBirth,String courseName,int enrollmentId,String dateOfEnrollment,int courseDuration,int tuitionFee,int numOfRemainingModules,int numOfMonthsAttended,int dropoutEnrollmentId,String dateOfDropout){
     super(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee);
     this.numOfRemainingModules=numOfRemainingModules;
     this.numOfMonthsAttended=numOfMonthsAttended;
-    this.dateOfDropout=dateOfDropout;
     this.dropoutEnrollmentId=dropoutEnrollmentId;
+    this.dateOfDropout=dateOfDropout;
+    
   }
-   @Override
-  public String toString(){
-    return super.toString()+
-    "\nNumber of Remaining Modules:"+numOfRemainingModules+
-    "\nNumber of Months Attended:"+numOfMonthsAttended+
-    "\nDate of dropout:"+dateOfDropout+
-    "\nDropout Enrollment Id:"+dropoutEnrollmentId;
-  }
+  @Override
+    public String toString() {
+      return "Dropout Student:\n" +
+        super.display() +
+        "Number of Remaining Modules: " + numOfRemainingModules + "\n" +
+        "Number of Months Attended: " + numOfMonthsAttended + "\n" +
+        "Date of Dropout: " + dateOfDropout + "\n" +
+        "Dropout Enrollment Id: " + dropoutEnrollmentId;
+    }
+
+  @Override
+    public String display(){
+      return super.display() +
+      "Number of Remaining Modules is" + numOfRemainingModules + "\n" +
+      "Number of Months Attended is " + numOfMonthsAttended + "\n" +
+      "Date of Dropout is " + dateOfDropout + "\n" +
+      "Enrollment Id is " + dropoutEnrollmentId;
+    }
   public String billsPayable(){
     if(hasPaid=false){
       if(getCourseDuration()>=numOfMonthsAttended){
@@ -1367,4 +1366,3 @@ class Dropout extends Student{
     }
   }
 }
-
