@@ -1,4 +1,3 @@
-
 //frame manipulaions Classes and packages
 import javax.swing.JFrame;
 import java.awt.Toolkit;
@@ -325,11 +324,11 @@ class Main{
 
     displayStudentButtonbt.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e){
-          String students = "";
+         // String students = "";
           for(Student object: studental){
-              students += object.display() + "\n";
+              object.display();
           }
-          JOptionPane.showMessageDialog(frame, students);
+          JOptionPane.showMessageDialog(frame,"Details in Terminal");
       }
   });
   
@@ -508,10 +507,11 @@ class Main{
             String regularStudent = "";
             for(Student regObject : studental){
                 if(regObject instanceof Regular) {
-                    regularStudent += ((Regular) regObject).regularDisplay();
+                   ((Regular)regObject).regularDisplay();
                 }
             }
-            JOptionPane.showMessageDialog(frame, regularStudent);
+
+            JOptionPane.showMessageDialog(frame, "Details in terminal");
         }
     });
 
@@ -533,7 +533,7 @@ class Main{
         for(Student obj:studental){
            if(obj instanceof Regular){
             Regular regularobj=(Regular) obj;
-            if(enrollmentIdCheck2==regularobj.getStudentEnrollmentId()){
+            if(enrollmentIdCheck2==regularobj.getEnrollmentID()){
               char grade=regularobj.getPresentPercentage(daysPresentCheck2);
               found=true;
               JOptionPane.showMessageDialog(frame,grade);
@@ -575,7 +575,7 @@ class Main{
         for(Student obj:studental){
            if(obj instanceof Regular){
             Regular regularobj=(Regular) obj;
-            if(enrollmentIdCheck2==regularobj.getStudentEnrollmentId()){
+            if(enrollmentIdCheck2==regularobj.getEnrollmentID()){
               regularobj.grantCertificate(courseNameCheck2,enrollmentIdCheck2,dateOfEnrollmentCheck);
               found=true;
               JOptionPane.showMessageDialog(frame,"Details has been displayed in terminal");
@@ -800,10 +800,10 @@ class Main{
         for(Student obj:studental){
           if(obj instanceof Dropout){
             Dropout drObj=(Dropout) obj;
-            if(enrollmentIdCheck3==drObj.getStudentEnrollmentId()){
+            if(enrollmentIdCheck3==drObj.getEnrollmentID()){
               found=true;
               drObj.billsPayable();
-              JOptionPane.showMessageDialog(frame,"Details in");
+              JOptionPane.showMessageDialog(frame,"Details in Terminal");
               break;
             }
             else{
@@ -827,7 +827,7 @@ class Main{
         for(Student objch:studental){
           if(objch instanceof Dropout){
             Dropout dropobj1=(Dropout) objch;
-            if(enrollmentIdCheck3==dropobj1.getStudentEnrollmentId()){
+            if(enrollmentIdCheck3==dropobj1.getEnrollmentID()){
               dropobj1.removeDropoutStudent();
               found=true;
               JOptionPane.showMessageDialog(frame,"Details in Terminal");
@@ -862,10 +862,10 @@ class Main{
         for(Student stdObject:studental){
           if(stdObject instanceof Dropout){
             Dropout dropObject=(Dropout) stdObject;
-            dropoutStudent+=dropObject.toString()+"\n";
+              dropObject.display();
           }
         }
-        JOptionPane.showMessageDialog(frame,dropoutStudent);
+        JOptionPane.showMessageDialog(frame,"Details in Terminal");
       }
     });
     //////////////////////////////////PAY BILL OF DROPOUT STUDENT KO ACTION LISTENER////////////////////////////////////////
@@ -1188,48 +1188,71 @@ class Student{
     this.courseDuration=courseDuration;
     this.tuitionFee=tuitionFee;
   }
+  public String getDateOfBirth(){
+    return dateOfBirth;
+  }
+  public String getStudentName(){
+    return studentName;
+  }
+  public String getDateOfEnrollment(){
+    return dateOfEnrollment;
+  }
+  public int getEnrollmentID(){
+    return enrollmentId;
+  }
   public int getCourseDuration(){
     return courseDuration;
   }
   public int getTuitionFee(){
     return tuitionFee;
   }
-  //setter method 
-  public void setStudentName(String sd){
-    this.studentName=sd;
-  }
-  public void setDateOfBirth(String db){
-    this.dateOfBirth=db;
-  }
-  public void setCourseName(String cn){
-    this.courseName=cn;
-  }
-  public void setEnrollmentID(int ei){
-    this.enrollmentId=ei;
-  }
-  public void setDateOfEnrollment(String de){
-    this.dateOfEnrollment=de;
-  }
-  public void setCourseDuration(int courseDuration){
-    this.courseDuration=courseDuration;
-  }
-  public void setTuitionFee(int tuitionFee){
-    this.tuitionFee=tuitionFee;
-  }
-  public int getStudentEnrollmentId(){
-    return enrollmentId;
-  }
+
+  //setter method
+    //creating a setter method to set the value of dateOfBirth
+  public void setDateOfBirth(String dateOfBirth)
+    {
+       this.dateOfBirth=dateOfBirth;
+    }
+    //creating a setter method to set the value of courseName
+  public void setCourseName(String courseName)
+    {
+       this.courseName=courseName;
+    }
+     //creating a setter method to set the value of studentName
+  public void setStudentName(String studentName)
+    {
+       this.studentName=studentName;
+    }  
+    //creating a setter method to set the value of dateOfEnrollment
+  public void setDateOfEnrollment(String dateOfEnrollment)
+    {
+       this.dateOfEnrollment=dateOfEnrollment;
+    }
+     //creating a setter method to set the value of enrollmentID
+  public void setEnrollmentID(int enrollmentID)
+    {
+      this.enrollmentId=enrollmentID;
+    }
+    //creating a setter method to set the value of courseDuration
+  public void setCourseDuration(int courseDuration)
+    {
+     this.courseDuration=courseDuration;
+    }
+  //creating a setter method to set the value of tuitionFee
+  public void setTuitionFee(int tuitionFee)
+    {
+       this.tuitionFee=tuitionFee;
+    }
 
 
-  public String display(){
-    return
-    "Student Name is "+studentName+"\n"+
-    "Date of Birth is "+dateOfBirth+"\n"+
-    "Course Name is "+courseName+"\n"+
-    "Enrollment Id is "+enrollmentId+"\n"+
-    "Date Of Enrollment is "+dateOfEnrollment+"\n"+
-    "Course Duration is "+courseDuration+"\n"+
-    "Tuition Fee is "+tuitionFee+"\n";
+  public void display(){
+    System.out.println("Student Name is "+studentName+"\n");
+    System.out.println("Date of Birth is "+dateOfBirth+"\n");
+    System.out.println("Course Name is "+courseName+"\n");
+    System.out.println("Enrollment Id is "+enrollmentId+"\n");
+    System.out.println("Date Of Enrollment is "+dateOfEnrollment+"\n");
+    System.out.println("Course Duration is "+courseDuration+"\n");
+    System.out.println("Tuition Fee is "+tuitionFee+"\n");
   }
 }
 
@@ -1242,27 +1265,36 @@ class Regular extends Student{
   
   public Regular(String studentName,String dateOfBirth,String courseName,int enrollmentId,String dateOfEnrollment,int courseDuration,int tuitionFee,int numOfModules,int regularEnrollmentId,int numOfCreditHours,double daysPresent){
     super(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee);
-    this.numOfModules=numOfModules;
-    this.regularEnrollmentId=regularEnrollmentId;
-    this.numOfCreditHours=numOfCreditHours;
+    setCourseName(courseName);
+    setEnrollmentID(enrollmentId);
+    setDateOfEnrollment(dateOfEnrollment);
+    this.numOfModules=numOfModules; 
+    this.numOfCreditHours=numOfCreditHours; 
     this.daysPresent=daysPresent;
+    this.regularEnrollmentId=regularEnrollmentId;
+    this.isGrantedScholarship=false;
   }
-  @Override
-  public String toString(){
-    return super.toString()+
-    "\nNumber of Modules:"+numOfModules+"\n"+
-    "\nRegular Enrollment Id:"+regularEnrollmentId+"\n"+
-    "\nNumber of Credit Hours:"+numOfCreditHours+"\n"+
-    "\nDays Present:"+daysPresent;
-  }
-  public String regularDisplay(){
-    return
-      super.display()+"\n"+
-      "Number of Modules is "+numOfModules+"\n"+
-      "\nRegular Enrollment Id is :"+regularEnrollmentId+
-      "\nNumber of Credit Hours is "+numOfCreditHours+
-      "\nDays Present is "+daysPresent;
-  }
+   //creating a getter method to return value of numOfModules
+  public int getNumOfModules()
+    {
+      return numOfModules;
+      }
+  //creating a getter method to return the value of numOfCreditHours
+  public int getNumOfCreditHours()
+    {
+      return numOfCreditHours;
+      }
+  //creating a getter method to return the value of daysPresent
+  public double getDaysPresent()
+    {
+      return daysPresent;
+      }
+  //creating a getter method to return the value of isGrantedScholarhip
+  public boolean getIsGrantedScholarship()
+    {
+      return isGrantedScholarship;
+     }
+
     public char getPresentPercentage(double numOfDaysPresent){
       this.daysPresent=numOfDaysPresent;
       char grade=' ';
@@ -1295,10 +1327,17 @@ class Regular extends Student{
     if(isGrantedScholarship==true){
       System.out.println("The scholarship has been granted");
     }
+  }
+  public void regularDisplay(){
+    super.display();
+    System.out.println("Number of Modules is "+numOfModules+"\n");
+    System.out.println("\nNumber of Credit Hours is "+numOfCreditHours);
+    System.out.println("\nRegular Enrollment Id is :"+regularEnrollmentId);
+    System.out.println("\nDays Present is "+daysPresent);
+  }
 }
-}
-
-////Dropout class
+package newGui;
+/* 
 class Dropout extends Student{
   private int numOfRemainingModules;
   private int numOfMonthsAttended;
@@ -1314,26 +1353,28 @@ class Dropout extends Student{
     this.dateOfDropout=dateOfDropout;
     
   }
+  /* 
   @Override
-    public String toString() {
-      return "Dropout Student:\n" +
-        super.display() +
-        "Number of Remaining Modules: " + numOfRemainingModules + "\n" +
-        "Number of Months Attended: " + numOfMonthsAttended + "\n" +
-        "Date of Dropout: " + dateOfDropout + "\n" +
-        "Dropout Enrollment Id: " + dropoutEnrollmentId;
-    }
+  public String toString() {
+      return super.toString() + "\n" +
+             "Number of Remaining Modules: " + numOfRemainingModules + "\n" +
+             "Number of Months Attended: " + numOfMonthsAttended + "\n" +
+             "Date of Dropout: " + dateOfDropout + "\n" +
+             "Dropout Enrollment Id: " + dropoutEnrollmentId;
+  }
+*/
+/* 
+  //@Override
+  public void display() {
+      super.display();
+      System.out.println("Number of Remaining Modules: " + numOfRemainingModules);
+      System.out.println("Number of Months Attended: " + numOfMonthsAttended);
+      System.out.println("Date of Dropout: " + dateOfDropout);
+      System.out.println("Dropout Enrollment Id: " + dropoutEnrollmentId);
+  }
 
-  @Override
-    public String display(){
-      return super.display() +
-      "Number of Remaining Modules is" + numOfRemainingModules + "\n" +
-      "Number of Months Attended is " + numOfMonthsAttended + "\n" +
-      "Date of Dropout is " + dateOfDropout + "\n" +
-      "Enrollment Id is " + dropoutEnrollmentId;
-    }
   public void billsPayable(){
-    if(hasPaid=false){
+    if(this.hasPaid=false){
       if(getCourseDuration()>=numOfMonthsAttended){
         this.remainingAmount=(getCourseDuration()-numOfMonthsAttended)*getTuitionFee();
         this.hasPaid=true;
@@ -1349,7 +1390,7 @@ class Dropout extends Student{
     
   }
   public void removeDropoutStudent(){
-    if(hasPaid==true){
+    if(this.hasPaid==true){
       setCourseDuration(0);
       setCourseName("");
       setDateOfBirth("");
@@ -1369,6 +1410,77 @@ class Dropout extends Student{
     }
   }
 }
+*/
+class Dropout extends Student {
+    private int numOfRemainingModules;
+    private int numOfMonthsAttended;
+    private String dateOfDropout;
+    private int remainingAmount;
+    private int dropoutEnrollmentId;
+    private boolean hasPaid;
+
+    public Dropout(String studentName, String dateOfBirth, String courseName, int enrollmentId, 
+                   String dateOfEnrollment, int courseDuration, int tuitionFee, 
+                   int numOfRemainingModules, int numOfMonthsAttended, int dropoutEnrollmentId, 
+                   String dateOfDropout) {
+
+        super(studentName, dateOfBirth, courseName, enrollmentId, dateOfEnrollment, courseDuration, tuitionFee);
+        setEnrollmentID(enrollmentId);
+        setCourseName(courseName);
+        setDateOfEnrollment(dateOfEnrollment);
+        this.numOfRemainingModules = numOfRemainingModules;
+        this.numOfMonthsAttended = numOfMonthsAttended;
+        this.dropoutEnrollmentId = dropoutEnrollmentId;
+        this.dateOfDropout = dateOfDropout;
+        this.remainingAmount=0;
+        this.hasPaid=false;
+    }
+
+    public void billsPayable() {
+        if (this.hasPaid==false) {
+            if (super.getCourseDuration() >= numOfMonthsAttended) {
+                this.remainingAmount = (super.getCourseDuration() - numOfMonthsAttended) *super.getTuitionFee();
+                this.hasPaid = true;
+                System.out.println("The bills are paid, no pending amount");
+            } else {
+                System.out.println("Remaining amount cannot be calculated....");
+            }
+        } else {
+            System.out.println("All bills are cleared out...");
+        }
+    }
+
+    public void removeDropoutStudent() {
+        if (this.hasPaid==true) {
+            setCourseDuration(0);
+            setCourseName("");
+            setDateOfBirth("");
+            setDateOfEnrollment("");
+            setEnrollmentID(0); 
+            setStudentName("");
+            setTuitionFee(0);
+            this.numOfRemainingModules = 0;
+            this.numOfMonthsAttended = 0;
+            this.dateOfDropout = "";
+            this.remainingAmount = 0;
+            this.hasPaid = false;
+            System.out.println("All details are cleared");
+        } else {
+            System.out.println("All bills not cleared");
+        }
+    }
+    
+    public void display() {
+        super.display();
+        System.out.println("Number of Remaining Modules: " + numOfRemainingModules);
+        System.out.println("Number of Months Attended: " + numOfMonthsAttended);
+        System.out.println("Date of Dropout: " + dateOfDropout);
+        System.out.println("Dropout Enrollment Id: " + dropoutEnrollmentId);
+    }
+
+}
+
+
 
 
 
