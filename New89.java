@@ -494,6 +494,13 @@ class Main{
 
         Student reg = new Regular(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfModules,regularEnrollmentIdCheck,numOfCreditHours1,numOfDaysPresent);
         studental.add(reg);
+        boolean checkingunique=checkUniquere(regularEnrollmentIdCheck);
+        if(checkingunique==true){
+          JOptionPane.showMessageDialog(frame,"The enrollment Id is not unique");
+        }
+        else if(checkingunique==false){
+          JOptionPane.showMessageDialog(frame,"The enrollment Id is unique");
+        }
         JOptionPane.showMessageDialog(frame,"Regular student record successfully recorded");
         displayRegularButtonbt.setVisible(true);
         
@@ -546,7 +553,7 @@ class Main{
           
         }
         if(found==false){
-          JOptionPane.showMessageDialog(frame,"Invalid Enrollment Id");
+          JOptionPane.showMessageDialog(frame,"Enrollment not found");
         }
 
       }
@@ -788,6 +795,13 @@ class Main{
         
         Student dropoutobj = new Dropout(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee,numOfRemainingModules,numofMonthsAttended,dropoutEnrollmentId,dateOfDropout);
         studental.add(dropoutobj);
+        boolean checkingunique=checkUniquere(dropoutEnrollmentId);
+        if(checkingunique==true){
+          JOptionPane.showMessageDialog(frame,"The enrollment Id is not unique");
+        }
+        if(checkingunique==false){
+          JOptionPane.showMessageDialog(frame,"The enrollment Id is unique");
+        }
         JOptionPane.showMessageDialog(frame,"Dropout student record successfully recorded");
         dropoutDisplaybt.setVisible(true);
       }
@@ -1061,7 +1075,7 @@ class Main{
       }
     }     
     catch(NumberFormatException e){
-
+        
     }
     return newRegularDaysPresent;
   }
@@ -1142,7 +1156,34 @@ class Main{
     }
     return newDropoutEnrollmentId;
   }
-  
+  //creating a method which check uniqueness of the enrollment if for regular 
+  public boolean checkUniquere(int eId){
+    boolean isUnique=false;
+    for(Student stuObj:studental){
+      if(stuObj instanceof Regular){
+          Regular regObj=(Regular) stuObj;
+          if(eId==regObj.getEnrollmentID()){
+            isUnique=true;
+            break;
+          }
+      }
+    }
+    return isUnique;
+  }
+  //creating a method which check uniqueness of the enrollment if for Dropout
+  public boolean checkUniquedrop(int eId){
+    boolean isUnique=false;
+    for(Student obj:studental){
+      if(obj instanceof Dropout){
+      Dropout dropObj=(Dropout) obj;
+      if(eId==dropObj.getEnrollmentID()){
+        isUnique=true;
+        break;
+      }
+     }
+    }
+    return isUnique;
+  }
   
 
 
@@ -1336,81 +1377,6 @@ class Regular extends Student{
     System.out.println("\nDays Present is "+daysPresent);
   }
 }
-package newGui;
-/* 
-class Dropout extends Student{
-  private int numOfRemainingModules;
-  private int numOfMonthsAttended;
-  private String dateOfDropout;
-  private int remainingAmount;
-  private int dropoutEnrollmentId;
-  private boolean hasPaid=false;
-  public Dropout(String studentName,String dateOfBirth,String courseName,int enrollmentId,String dateOfEnrollment,int courseDuration,int tuitionFee,int numOfRemainingModules,int numOfMonthsAttended,int dropoutEnrollmentId,String dateOfDropout){
-    super(studentName,dateOfBirth,courseName,enrollmentId,dateOfEnrollment,courseDuration,tuitionFee);
-    this.numOfRemainingModules=numOfRemainingModules;
-    this.numOfMonthsAttended=numOfMonthsAttended;
-    this.dropoutEnrollmentId=dropoutEnrollmentId;
-    this.dateOfDropout=dateOfDropout;
-    
-  }
-  /* 
-  @Override
-  public String toString() {
-      return super.toString() + "\n" +
-             "Number of Remaining Modules: " + numOfRemainingModules + "\n" +
-             "Number of Months Attended: " + numOfMonthsAttended + "\n" +
-             "Date of Dropout: " + dateOfDropout + "\n" +
-             "Dropout Enrollment Id: " + dropoutEnrollmentId;
-  }
-*/
-/* 
-  //@Override
-  public void display() {
-      super.display();
-      System.out.println("Number of Remaining Modules: " + numOfRemainingModules);
-      System.out.println("Number of Months Attended: " + numOfMonthsAttended);
-      System.out.println("Date of Dropout: " + dateOfDropout);
-      System.out.println("Dropout Enrollment Id: " + dropoutEnrollmentId);
-  }
-
-  public void billsPayable(){
-    if(this.hasPaid=false){
-      if(getCourseDuration()>=numOfMonthsAttended){
-        this.remainingAmount=(getCourseDuration()-numOfMonthsAttended)*getTuitionFee();
-        this.hasPaid=true;
-        System.out.println("The bills are payed, no pending amount");
-      }
-      else{
-        System.out.println("Remaining amount cannot be calcualted");
-      }
-    } 
-    else{
-      System.out.println("All bills are cleared out.....");
-    }
-    
-  }
-  public void removeDropoutStudent(){
-    if(this.hasPaid==true){
-      setCourseDuration(0);
-      setCourseName("");
-      setDateOfBirth("");
-      setDateOfEnrollment("");
-      setEnrollmentID(0);
-      setStudentName("");
-      setTuitionFee(0);
-      this.numOfRemainingModules=0;
-      this.numOfMonthsAttended=0;
-      this.dateOfDropout="";
-      this.remainingAmount=0;
-      this.hasPaid=false;
-      System.out.println("All bills are cleared");
-    }
-    else{
-      System.out.println("All bills not cleared");
-    }
-  }
-}
-*/
 class Dropout extends Student {
     private int numOfRemainingModules;
     private int numOfMonthsAttended;
